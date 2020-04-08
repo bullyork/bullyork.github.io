@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="nodejs,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="引子至诚之道可以前知。国家将兴，必有祯祥；国家将亡，必有妖孽。见乎蓍龟，动乎四体。祸福将至，善必先知之；不善，必先知之。故至诚如神。 –《中庸》 文件操作两个例子小文件拷贝 1234567891011var fs = require(&amp;apos;fs&amp;apos;);function copy(src, dst) &amp;#123;    fs.writeFileSync(dst, fs.readFile">
+<meta name="keywords" content="nodejs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nodejs学习文件操作">
+<meta property="og:url" content="http://bullyork.github.io/2017/11/10/nodejs学习文件操作/index.html">
+<meta property="og:site_name" content="缘来我们在这里">
+<meta property="og:description" content="引子至诚之道可以前知。国家将兴，必有祯祥；国家将亡，必有妖孽。见乎蓍龟，动乎四体。祸福将至，善必先知之；不善，必先知之。故至诚如神。 –《中庸》 文件操作两个例子小文件拷贝 1234567891011var fs = require(&amp;apos;fs&amp;apos;);function copy(src, dst) &amp;#123;    fs.writeFileSync(dst, fs.readFile">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-13T03:12:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nodejs学习文件操作">
+<meta name="twitter:description" content="引子至诚之道可以前知。国家将兴，必有祯祥；国家将亡，必有妖孽。见乎蓍龟，动乎四体。祸福将至，善必先知之；不善，必先知之。故至诚如神。 –《中庸》 文件操作两个例子小文件拷贝 1234567891011var fs = require(&amp;apos;fs&amp;apos;);function copy(src, dst) &amp;#123;    fs.writeFileSync(dst, fs.readFile">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://bullyork.github.io/2017/11/10/nodejs学习文件操作/">
+
+
+
+
+
+  <title>nodejs学习文件操作 | 缘来我们在这里</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">缘来我们在这里</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">乱世天狼的博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bullyork.github.io/2017/11/10/nodejs学习文件操作/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乱世天狼">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="缘来我们在这里">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">nodejs学习文件操作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-10T17:23:16+08:00">
+                2017-11-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h3><p>至诚之道可以前知。国家将兴，必有祯祥；国家将亡，必有妖孽。见乎蓍龟，动乎四体。祸福将至，善必先知之；不善，必先知之。故至诚如神。</p>
+<p>–《中庸》</p>
+<h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3><h4 id="两个例子"><a href="#两个例子" class="headerlink" title="两个例子"></a>两个例子</h4><p><em>小文件拷贝</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var fs = require(&apos;fs&apos;);</span><br><span class="line"></span><br><span class="line">function copy(src, dst) &#123;</span><br><span class="line">    fs.writeFileSync(dst, fs.readFileSync(src));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function main(argv) &#123;</span><br><span class="line">    copy(argv[0], argv[1]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main(process.argv.slice(2));</span><br></pre></td></tr></table></figure>
+<p><em>大文件拷贝</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var fs = require(&apos;fs&apos;);</span><br><span class="line"></span><br><span class="line">function copy(src, dst) &#123;</span><br><span class="line">    fs.createReadStream(src).pipe(fs.createWriteStream(dst));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function main(argv) &#123;</span><br><span class="line">    copy(argv[0], argv[1]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main(process.argv.slice(2));</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>process是一个全局变量，可以通过process.argv获得命令行参数。argv[0]固定等于NodeJS执行程序的绝对路径，argv[1]固定等于主模块的绝对路径。</p>
+</blockquote>
+<h4 id="API"><a href="#API" class="headerlink" title="API"></a>API</h4><p><em>Buffer</em></p>
+<p>js语言只有字符串数据类型，没有二进制数据类型，因此Nodejs提供了一个与<code>String</code>对等的全局构造函数<code>Buffer</code>来提供对二进制数据的操作。除了可以读取文件得到<code>Buffer</code>的实例外，还能够直接构造，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var bin = new Buffer([ 0x68, 0x65, 0x6c, 0x6c, 0x6f ]);</span><br></pre></td></tr></table></figure></p>
+<p><code>Buffer</code>实例与字符串类似，除了可以用<code>.length</code>属性得到字节长度外，还可以用<code>[index]</code>方式读取指定位置的字节，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin[0]; // =&gt; 0x68;</span><br></pre></td></tr></table></figure></p>
+<p><code>Buffer</code>与字符串能够互相转化，例如可以使用指定编码将二进制数据转化为字符串：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var str = bin.toString(&apos;utf-8);</span><br></pre></td></tr></table></figure></p>
+<p>或者反过来，将字符串转换为指定编码下的二进制数据：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var bin = new Buffer(&apos;hello&apos;, &apos;utf-8&apos;); // =&gt; &lt;Buffer 68 65 6c 6c 6f&gt;</span><br></pre></td></tr></table></figure></p>
+<p><code>Buffer</code>与字符串有一个重要区别。字符串是只读的，并且对字符串的任何修改得到的都是一个新字符串，原字符串保持不变。至于<code>Buffer</code>，更像是可以做指针操作的C语言数组。例如，可以用<code>[index]</code>方式直接修改某个位置的字节。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin[0] = 0x48</span><br></pre></td></tr></table></figure></p>
+<p>而<code>.slice</code>方法也不是返回一个新的<code>Buffer</code>，而更像是返回了指向原<code>Buffer</code>中间的某个位置的指针，如下所示。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[ 0x68, 0x65, 0x6c, 0x6c, 0x6f ]</span><br><span class="line">    ^           ^</span><br><span class="line">    |           |</span><br><span class="line">   bin     bin.slice(2)</span><br></pre></td></tr></table></figure></p>
+<p>因此对<code>.slice</code>方法返回的<code>Buffer</code>的修改会作用于原<code>Buffer</code>，例如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> bin = <span class="keyword">new</span> Buffer([<span class="number">0x68</span>, <span class="number">0x65</span>, <span class="number">0x6c</span>, <span class="number">0x6f</span>]);</span><br><span class="line"><span class="keyword">var</span> sub = bin.slice(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">sub[<span class="number">0</span>] = <span class="number">0x65</span>;</span><br><span class="line"><span class="built_in">console</span>.log(bin); <span class="comment">// =&gt; &lt;Buffer 68 65 65 6c 6f&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>也因此，如果想要拷贝一份<code>Buffer</code>，得首先创建一个新的<code>Buffer</code>，并通过<code>.copy</code>方法把原<code>Buffer</code>中的数据复制过去。以下是一个例子。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> bin = <span class="keyword">new</span> Buffer([<span class="number">0x68</span>, <span class="number">0x65</span>, <span class="number">0x6c</span>, <span class="number">0x6c</span>, <span class="number">0x6c</span>]);</span><br><span class="line"><span class="keyword">var</span> dup = <span class="keyword">new</span> Buffer(bing.length)</span><br><span class="line">bin.copy(dup)</span><br><span class="line">dup[<span class="number">0</span>] = <span class="number">0x48</span>;</span><br><span class="line"><span class="built_in">console</span>.log(bin); <span class="comment">// =&gt; &lt;Buffer 68 65 6c 6c 6f&gt;</span></span><br><span class="line"><span class="built_in">console</span>.log(dup); <span class="comment">// =&gt; &lt;Buffer 48 65 65 6c 6f&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>总之，<code>Buffer</code>将js的数据处理能力从字符串扩展到了任意二进制数据。</p>
+<p><code>Stream</code></p>
+<p>当内存中无法一次装下需要处理的数据时，或者一边读取一边处理更加高效时，我们就需要用到数据流。NodeJS中通过各种<code>Stream</code>来提供对数据流的操作。</p>
+<p>以上面的大文件拷贝程序为例，我们可以为数据创建一个只读数据流，示例如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> rs = fs.createReadStream(pathname);</span><br><span class="line"></span><br><span class="line">rs.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>)</span>&#123;</span><br><span class="line">  doSomeThing(chunk);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">rs.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  cleanUp();</span><br><span class="line">&#125;)；</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p><code>Stream</code>基于事件机制工作，所有<code>Stream</code>的实例都继承于NodeJS提供的<code>EventEmitter</code></p>
+</blockquote>
+<p>上面代码中的<code>data</code>事件会源源不断地被触发，不管<code>doSomething</code>函数是否处理的过来。代码可以继续如下改造，以解决这个问题。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> rs = fs.createReadStream(src);</span><br><span class="line"></span><br><span class="line">rs.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>)</span>&#123;</span><br><span class="line">  res.pause();</span><br><span class="line">  doSomething(chunk, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    res.resume();</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">rs.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  cleanUp();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>以上代码给<code>doSomething</code>函数加上了回调，因此我们可以在处理数据前暂停数据读取，并在处理数据后继续读取数据。</p>
+<p>此外，我们也可以为数据目标创建一个只写数据流，示例如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> rs = fs.createReadStream(src);</span><br><span class="line"><span class="keyword">var</span> ws = fs.createWriteStream(dst);</span><br><span class="line"></span><br><span class="line">rs.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>)</span>&#123;</span><br><span class="line">  ws.write(chunk);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">rs.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  ws.end();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>我们把<code>doSomething</code>换成了往只写数据流里写入数据后，以上代码看起来就像是一个文件拷贝程序了。但是以上代码存在上面提到的问题，如果写入速度跟不上读取速度的话，只写数据流内部的缓存会爆仓。我们可以根据<code>.write</code>方法的返回值来判断传入的数据是写入目标了，还是临时放在了缓存，并根据<code>drain</code>事件来判断什么时候只写数据流已经将缓存中的数据写入目标，可以传入下一个待写数据了。因此代码可以改造如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> rs = fs.createReadStream(src);</span><br><span class="line"><span class="keyword">var</span> ws = fs.createWriteStream(dst);</span><br><span class="line">rs.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(ws.write(chunk) === <span class="literal">false</span>)&#123;</span><br><span class="line">    rs.pause()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">rs.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  ws.end();</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">ws.on(<span class="string">'drain'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  res.resume();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>以上代码实现了数据从只读数据流到只写数据流的搬运，并包括了防爆仓控制。因为这种使用场景很多，例如上边的大文件拷贝程序，NodeJS直接提供了<code>.pipe</code>方法来做这件事，其内部实现的方式与上面的代码类似</p>
+<p><em>File System</em></p>
+<p>NodeJS通过<code>fs</code>内置模块提供对文件的操作。<code>fs</code>模块提供的API基本上可以分为以下三类：</p>
+<ul>
+<li>文件属性读写：<code>fs.stat</code>、<code>fs.chmod</code>、<code>fs.chown</code>等</li>
+<li>文件内容读写： <code>fs.readFile</code>、<code>fs.readdir</code>、<code>fs.writeFile</code>、<code>fs.mkdir</code>等等</li>
+<li>底层文件操作：<code>fs.open</code>、<code>fs.read</code>、<code>fs.write</code>、<code>fs.close</code>等等</li>
+</ul>
+<p>NodeJS最精华的异步IO模型在<code>fs</code>模块里有着充分的体现，例如上边提到的这些API都通过回调函数传递结果。以<code>fs.readFile</code>为例：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fs.readFile(pathname, <span class="function"><span class="keyword">function</span>(<span class="params">err, data</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(err)&#123;</span><br><span class="line">    <span class="comment">// Deal with error.</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// Deal with data.</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>如上面代码所示，基本上所有的<code>fs</code>模块API的回调参数都有两个。第一个参数在有错误发生时等于异常对象，第二个参数始终用于返回API方法执行结果。<br>此外，<code>fs</code>模块的所有一步API都有对应的同步版本，用于无法使用异步操作时，或者同步操作更方便时的情况。同步API除了方法名的末尾多了一个<code>Sync</code>之外，异常对象与执行结果的传递方式也有相应变化。同样以<code>fs.readFileSync</code>为例：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">var</span> data = fs.readFileSync(pathname);</span><br><span class="line">  <span class="comment">// deal with data</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">  <span class="comment">// deal with error</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>fs</code>模块提供的API很多，需要时自行查阅文档。</p>
+<p><em>Path</em></p>
+<p>操作文件时难免不与文件路径打交道。NodeJS提供了path内置模块来简化路径相关操作，并提升代码可读性。以下分别介绍几个常用的API。</p>
+<ul>
+<li><p>path.normalize<br>将传入路径转换为标准路径，具体讲的话，出了解析路径中的<code>.</code>与<code>..</code>外，还能去掉多余的斜杠。如果有程序需要使用路径作某些数据的索引，但又允许用户随意输入路径时，就需要使用该方法保证路径的唯一性。以下是一个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="keyword">var</span> cache = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">store</span>(<span class="params">key, value</span>)</span>&#123;</span><br><span class="line">  cache[path.normalize(key)] = value</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">store(<span class="string">'foo/bar'</span>, <span class="number">1</span>)</span><br><span class="line">store(<span class="string">'foo//baz//../bar'</span>, <span class="number">2</span>)</span><br><span class="line"><span class="built_in">console</span>.log(cache)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>标准化之后的路径里的斜杠在Windows系统下是<code>\</code>，而在linux系统下是<code>/</code>。如果想保证任何系统夏使用<code>/</code>作为路径分隔符的话，需要用<code>.replace(/\\/g, &#39;/&#39;)</code> 再替换一下标准路径。</p>
+</blockquote>
+</li>
+<li><p>path.join<br>将传入的多个路径拼接为标准路径。该方法可避免手工拼接字符串的繁琐，并且能在不同系统下正确使用相应的路径分隔符。以下是一个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path.join(<span class="string">'foo/'</span>, <span class="string">'baz/'</span>, <span class="string">'../bar'</span>); <span class="comment">// =&gt; 'foo/bar'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>path.extname<br>当我们需要根据不同文件扩展明做不同的工作时，该方法就显得很好用。以下是一个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path.extname(<span class="string">'foo/bar.js'</span>); <span class="comment">// =&gt; '.js'</span></span><br></pre></td></tr></table></figure>
+<p>其余方法请参考官方文档</p>
+</li>
+</ul>
+<h4 id="遍历目录"><a href="#遍历目录" class="headerlink" title="遍历目录"></a>遍历目录</h4><p>遍历目录是操作文件时的一个常见需求。比如写了一个程序，需要找到并处理指定目录下的所有js文件时，就需要遍历挣个目录。</p>
+<p><em>递归算法</em></p>
+<p>遍历目录时一般使用递归算法，否则就难以写出简洁的编码。递归算法与数学归纳法类似。通过不断缩小问题的规模来解决问题。例：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">factorial</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(n === <span class="number">1</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> n * factorial(n<span class="number">-1</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面的函数用于计算N的阶乘。可以看到，当N大于1时，问题简化为计算N乘以N-1的阶乘。当N等于1时，问题达到最小规模，不需要再简化，因此直接返回1。</p>
+<blockquote>
+<p>陷阱：使用递归算法编写的代码虽然简洁，但由于每递归一次就产生一次函数调用，在需要优先考虑性能时，需要把递归算法转换为循环算法，以减少函数调用次数。<br><em>遍历算法</em></p>
+</blockquote>
+<p>目录是一个树状结构，在遍历时一般使用深度优先+先序遍历算法。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nodejs/" rel="tag"># nodejs</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/02/nodejs学习基本/" rel="next" title="nodejs学习基础内容">
+                <i class="fa fa-chevron-left"></i> nodejs学习基础内容
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/11/数据结构/" rel="prev" title="数据结构">
+                数据结构 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">乱世天狼</p>
+              <p class="site-description motion-element" itemprop="description">乱世天狼 | 前端 | html | css | html5 | css3 | react | redux | webpack | 哲学 | 精神 | 生活</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#引子"><span class="nav-number">1.</span> <span class="nav-text">引子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件操作"><span class="nav-number">2.</span> <span class="nav-text">文件操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#两个例子"><span class="nav-number">2.1.</span> <span class="nav-text">两个例子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#API"><span class="nav-number">2.2.</span> <span class="nav-text">API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#遍历目录"><span class="nav-number">2.3.</span> <span class="nav-text">遍历目录</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">乱世天狼</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

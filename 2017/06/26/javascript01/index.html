@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="js,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="引子知止而后有定，定而后能静，静而后能安，安而后能虑，虑而后能得。物有本末，事有终始。知所先后，则近道矣！ – 大学 javascript简史诞生于1995年，1997年ECMA（欧洲计算机制造商协会）制定ECMA-262标准 javascript实现 核心：ECMAScript 文档对象模型：DOM 浏览器对象模型：BOM  ECMAScript 语法 类型 语句 关键字 保留字 操">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript简介 - 第一章">
+<meta property="og:url" content="http://bullyork.github.io/2017/06/26/javascript01/index.html">
+<meta property="og:site_name" content="缘来我们在这里">
+<meta property="og:description" content="引子知止而后有定，定而后能静，静而后能安，安而后能虑，虑而后能得。物有本末，事有终始。知所先后，则近道矣！ – 大学 javascript简史诞生于1995年，1997年ECMA（欧洲计算机制造商协会）制定ECMA-262标准 javascript实现 核心：ECMAScript 文档对象模型：DOM 浏览器对象模型：BOM  ECMAScript 语法 类型 语句 关键字 保留字 操">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-13T03:12:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javascript简介 - 第一章">
+<meta name="twitter:description" content="引子知止而后有定，定而后能静，静而后能安，安而后能虑，虑而后能得。物有本末，事有终始。知所先后，则近道矣！ – 大学 javascript简史诞生于1995年，1997年ECMA（欧洲计算机制造商协会）制定ECMA-262标准 javascript实现 核心：ECMAScript 文档对象模型：DOM 浏览器对象模型：BOM  ECMAScript 语法 类型 语句 关键字 保留字 操">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://bullyork.github.io/2017/06/26/javascript01/">
+
+
+
+
+
+  <title>javascript简介 - 第一章 | 缘来我们在这里</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">缘来我们在这里</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">乱世天狼的博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bullyork.github.io/2017/06/26/javascript01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乱世天狼">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="缘来我们在这里">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">javascript简介 - 第一章</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-26T19:16:59+08:00">
+                2017-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h3><p>知止而后有定，定而后能静，静而后能安，安而后能虑，虑而后能得。物有本末，事有终始。知所先后，则近道矣！</p>
+<p>– 大学</p>
+<h3 id="javascript简史"><a href="#javascript简史" class="headerlink" title="javascript简史"></a>javascript简史</h3><p>诞生于1995年，1997年ECMA（欧洲计算机制造商协会）制定ECMA-262标准</p>
+<h3 id="javascript实现"><a href="#javascript实现" class="headerlink" title="javascript实现"></a>javascript实现</h3><ul>
+<li>核心：ECMAScript</li>
+<li>文档对象模型：DOM</li>
+<li>浏览器对象模型：BOM</li>
+</ul>
+<h4 id="ECMAScript"><a href="#ECMAScript" class="headerlink" title="ECMAScript"></a>ECMAScript</h4><ul>
+<li>语法</li>
+<li>类型</li>
+<li>语句</li>
+<li>关键字</li>
+<li>保留字</li>
+<li>操作符</li>
+<li>对象</li>
+</ul>
+<h4 id="文档对象模型-DOM"><a href="#文档对象模型-DOM" class="headerlink" title="文档对象模型(DOM)"></a>文档对象模型(DOM)</h4><p>DOM1: DOM核型(DOMcore)和DOM HTML。DOM核心规定的是如何映射基于XML的文档结构，以便简化对文档中任意部分的访问和操作；DOM HTML则在DOM核心的基础上加以扩展，添加了针对HTML的对象和方法。</p>
+<p>DOM2: DOM2级在原来的DOM的基础上又扩充了(DHTML一直都支持)鼠标和用户界面事件，范围，遍历（迭代DOM文档的方法）等细分模块，而且通过对象接口增加了对css的支持。</p>
+<h5 id="DOM2新增模块"><a href="#DOM2新增模块" class="headerlink" title="DOM2新增模块"></a>DOM2新增模块</h5><ul>
+<li>DOM视图(DOM Views)：定义了跟踪不同文档（定义了跟踪不同文档，应用css之前，应用css之后）视图的接口</li>
+<li>DOM事件(DOM Events)：定义了事件和事件处理的接口</li>
+<li>DOM样式(DOM Style)：定义了基于css为元素应用样式的接口</li>
+<li>DOM范围和遍历(DOM Travalsal and Range)：定义了遍历和操作文档的接口</li>
+</ul>
+<h5 id="DOM3模块"><a href="#DOM3模块" class="headerlink" title="DOM3模块"></a>DOM3模块</h5><ul>
+<li>DOM加载和保存模块(DOM Load and Save)：统一方式加载和保存文档的方法</li>
+<li>DOM验证模块(DOM Validation)：验证文档的方法</li>
+</ul>
+<h5 id="其他DOM标准"><a href="#其他DOM标准" class="headerlink" title="其他DOM标准"></a>其他DOM标准</h5><ul>
+<li>SVG1.0</li>
+<li>MathML1.0</li>
+<li>SMIL</li>
+</ul>
+<h4 id="浏览器对象模型-BOM"><a href="#浏览器对象模型-BOM" class="headerlink" title="浏览器对象模型(BOM)"></a>浏览器对象模型(BOM)</h4><ul>
+<li>弹出新浏览器窗口的功能</li>
+<li>移动、缩放和关闭浏览器窗口的功能</li>
+<li>提供浏览器详细信息的navigator对象</li>
+<li>提供浏览器所加载页面详细信息的location对象</li>
+<li>提供用户分辨率详细信息的screen对象</li>
+<li>对cookie的支持</li>
+<li>像XMLHttpRequest和ActionXObject这样的自定义对象</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/26/css-key-point/" rel="next" title="css重点">
+                <i class="fa fa-chevron-left"></i> css重点
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/26/javascript02/" rel="prev" title="在HTML中使用javascript">
+                在HTML中使用javascript <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">乱世天狼</p>
+              <p class="site-description motion-element" itemprop="description">乱世天狼 | 前端 | html | css | html5 | css3 | react | redux | webpack | 哲学 | 精神 | 生活</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#引子"><span class="nav-number">1.</span> <span class="nav-text">引子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#javascript简史"><span class="nav-number">2.</span> <span class="nav-text">javascript简史</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#javascript实现"><span class="nav-number">3.</span> <span class="nav-text">javascript实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ECMAScript"><span class="nav-number">3.1.</span> <span class="nav-text">ECMAScript</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文档对象模型-DOM"><span class="nav-number">3.2.</span> <span class="nav-text">文档对象模型(DOM)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#DOM2新增模块"><span class="nav-number">3.2.1.</span> <span class="nav-text">DOM2新增模块</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#DOM3模块"><span class="nav-number">3.2.2.</span> <span class="nav-text">DOM3模块</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#其他DOM标准"><span class="nav-number">3.2.3.</span> <span class="nav-text">其他DOM标准</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#浏览器对象模型-BOM"><span class="nav-number">3.3.</span> <span class="nav-text">浏览器对象模型(BOM)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">乱世天狼</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

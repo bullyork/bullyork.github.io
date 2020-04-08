@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="create-react-app,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="引子武陵春·春晚宋：李清照 风住尘香花已尽，日晚倦梳头。物是人非事事休，欲语泪先流。闻说双溪春尚好，也拟泛轻舟。只恐双溪舴艋舟，载不动许多愁。 正文更新新版本Create React App主要分为两部分：  create-react-app: 全局命令行用于创建新的项目 react-scripts: 生成项目中的依赖  create-react-app几乎永远不用更新，因为所有的配置其实都在re">
+<meta name="keywords" content="create-react-app">
+<meta property="og:type" content="article">
+<meta property="og:title" content="create-react-app使用">
+<meta property="og:url" content="http://bullyork.github.io/2018/07/16/create-react-app使用/index.html">
+<meta property="og:site_name" content="缘来我们在这里">
+<meta property="og:description" content="引子武陵春·春晚宋：李清照 风住尘香花已尽，日晚倦梳头。物是人非事事休，欲语泪先流。闻说双溪春尚好，也拟泛轻舟。只恐双溪舴艋舟，载不动许多愁。 正文更新新版本Create React App主要分为两部分：  create-react-app: 全局命令行用于创建新的项目 react-scripts: 生成项目中的依赖  create-react-app几乎永远不用更新，因为所有的配置其实都在re">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-13T03:12:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="create-react-app使用">
+<meta name="twitter:description" content="引子武陵春·春晚宋：李清照 风住尘香花已尽，日晚倦梳头。物是人非事事休，欲语泪先流。闻说双溪春尚好，也拟泛轻舟。只恐双溪舴艋舟，载不动许多愁。 正文更新新版本Create React App主要分为两部分：  create-react-app: 全局命令行用于创建新的项目 react-scripts: 生成项目中的依赖  create-react-app几乎永远不用更新，因为所有的配置其实都在re">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://bullyork.github.io/2018/07/16/create-react-app使用/">
+
+
+
+
+
+  <title>create-react-app使用 | 缘来我们在这里</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">缘来我们在这里</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">乱世天狼的博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bullyork.github.io/2018/07/16/create-react-app使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乱世天狼">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="缘来我们在这里">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">create-react-app使用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-16T20:23:17+08:00">
+                2018-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h2><h3 id="武陵春·春晚"><a href="#武陵春·春晚" class="headerlink" title="武陵春·春晚"></a>武陵春·春晚</h3><p>宋：李清照</p>
+<p>风住尘香花已尽，日晚倦梳头。物是人非事事休，欲语泪先流。<br>闻说双溪春尚好，也拟泛轻舟。只恐双溪舴艋舟，载不动许多愁。</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="更新新版本"><a href="#更新新版本" class="headerlink" title="更新新版本"></a>更新新版本</h3><p>Create React App主要分为两部分：</p>
+<ul>
+<li>create-react-app: 全局命令行用于创建新的项目</li>
+<li>react-scripts: 生成项目中的依赖</li>
+</ul>
+<p><code>create-react-app</code>几乎永远不用更新，因为所有的配置其实都在<code>react-scripts</code></p>
+<p><code>create-react-app</code>每次生成新项目的时候，总会用最新版本的<code>react-scripts</code>，所以创建的app必然能够获得所有最新的特性</p>
+<p>如果要更新一个现有工程的<code>react-scripts</code>，打开<a href="https://github.com/facebook/create-react-app/blob/master/CHANGELOG.md" target="_blank" rel="noopener">更新日志</a>，然后找到现在的版本(如果不确定，看下package.json)，然后根据迁移指南升级。</p>
+<p>大部分情况，更新<code>package.json</code>中的<code>react-scripts</code>版本，然后运行<code>npm install</code>即可，但是为了有可能存在的大版本更新，还是要看下<a href="https://github.com/facebook/create-react-app/blob/master/CHANGELOG.md" target="_blank" rel="noopener">更新日志</a>，然后找到现在的版本(如果不确定，看下package.json)，然后根据迁移指南升级。</p>
+<p>维护者：我们会尽可能保持更新尽可能小，这样可以保证用户升级<code>react-scripts</code>是无痛的。</p>
+<h3 id="反馈"><a href="#反馈" class="headerlink" title="反馈"></a>反馈</h3><p>维护者：我们对于反馈，一直是非常开放的心态，来<a href="https://github.com/facebook/create-react-app/issues" target="_blank" rel="noopener">反馈</a>吧</p>
+<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><p>创建完之后，工程目录结构如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">my-app/</span><br><span class="line">  README.md</span><br><span class="line">  node_modules/</span><br><span class="line">  package.json</span><br><span class="line">  public/</span><br><span class="line">    index.html</span><br><span class="line">    favicon.ico</span><br><span class="line">  src/</span><br><span class="line">    App.css</span><br><span class="line">    App.js</span><br><span class="line">    App.test.js</span><br><span class="line">    index.css</span><br><span class="line">    index.js</span><br><span class="line">    logo.svg</span><br></pre></td></tr></table></figure></p>
+<p>在创建的这个工程中，<strong>以下文件必须是固定的文件名</strong></p>
+<ul>
+<li><code>public/index.html</code> 是页面模版</li>
+<li><code>src/index.js</code> 是js入口</li>
+</ul>
+<p>其他的文件可以酌情删除或修改   </p>
+<p>可以在<code>src</code>内部创建子目录。为了快速的rebuild，只有在<code>src</code>目录才会被webpack处理。所以需要 <strong>把所有css和js文件放到<code>src</code>目录下</strong>，否则webpack会忽略掉。   </p>
+<p>只有在<code>public</code>文件夹下面的文件可以被<code>public/index.html</code>使用<br>在js和html中使用资源请阅读下面的说明   </p>
+<p>其实可以创建更多顶层目录。<br>这些文件不会在被正式编译覆盖，所以可以用来放一些像文档之类的东东</p>
+<h3 id="可用的一些脚本"><a href="#可用的一些脚本" class="headerlink" title="可用的一些脚本"></a>可用的一些脚本</h3><p><code>npm start</code></p>
+<p>在development模式下运行，打开 <a href="http://localhost:3000" target="_blank" rel="noopener">http://localhost:3000</a> 在浏览器中查看</p>
+<p>当你编辑并保存的时候，这个页面会自动重载。你还可以在console中看到一些lint的错误</p>
+<p><code>npm test</code></p>
+<p>在观测模式下发起测试，更多信息请参考 <a href="https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#running-tests" target="_blank" rel="noopener">运行测试</a></p>
+<p><code>npm run build</code></p>
+<p>构建正式环境的app，并放置于<code>build</code>文件夹<br>这个操作会在正式环境打包react，并优化构建至最优表现   </p>
+<p>构建会压缩文件并且文件名包含内容哈希   </p>
+<p>参考<a href="https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#deployment" target="_blank" rel="noopener">发布资料</a>查看更多信息</p>
+<p><code>npm run eject</code></p>
+<blockquote>
+<p>声明：这是一个单项操作。一旦<code>eject</code>之后，不能回去</p>
+</blockquote>
+<p>如果你对默认的配置选项不满意，可以在任何时间<code>eject</code>。这个命令会移除项目中的单向依赖。   </p>
+<p>另外，<code>eject</code>会复制所有的配置文件并且迁移所有依赖(webpack，babel，eslint等)到项目中，这样你可以自主修改，覆盖这些东东的默认配置。所有的命令，除了<code>eject</code>，依然可以使用，但是他们会指到拷贝出来的脚本，所以你可以更改它们。在这一点上，你完全随意。</p>
+<p>你甚至可以完全不用这个命令。一些辅助的特性能解决大部分中小型项目配置需求，所以你不是必须要用这个特性。另外，如果你不曾准备好要定制化，这个命令将很鸡肋。</p>
+<h3 id="支持的浏览器"><a href="#支持的浏览器" class="headerlink" title="支持的浏览器"></a>支持的浏览器</h3><p>默认情况，生成的工程使用最新版本React</p>
+<p>支持的浏览器，要看<a href="https://reactjs.org/docs/react-dom.html#browser-support" target="_blank" rel="noopener">react相关文档</a></p>
+<h3 id="支持的语言特性和polyfills"><a href="#支持的语言特性和polyfills" class="headerlink" title="支持的语言特性和polyfills"></a>支持的语言特性和polyfills</h3><p>此工程支持最新js标准的一个超集。<br>除了ES6预发特性外，还支持：</p>
+<ul>
+<li><a href="https://github.com/rwaldron/exponentiation-operator" target="_blank" rel="noopener">Exponentiation Operator</a> (ES2016).</li>
+<li><a href="https://github.com/tc39/ecmascript-asyncawait" target="_blank" rel="noopener">Async/await</a> (ES2017).</li>
+<li><a href="https://github.com/tc39/proposal-object-rest-spread" target="_blank" rel="noopener">Object Rest/Spread Properties</a> (stage 3 proposal).</li>
+<li><a href="https://github.com/tc39/proposal-dynamic-import" target="_blank" rel="noopener">Dynamic import()</a> (stage 3 proposal)</li>
+<li><a href="https://github.com/tc39/proposal-class-public-fields" target="_blank" rel="noopener">Class Fields and Static Properties</a> (part of stage 3 proposal).</li>
+<li><a href="https://reactjs.org/docs/introducing-jsx.html" target="_blank" rel="noopener">jsx</a> 和 <a href="https://flow.org/" target="_blank" rel="noopener">flow</a></li>
+</ul>
+<p>学习更多请查看<a href="https://babeljs.io/docs/en/plugins/#presets-stage-x-experimental-presets-" target="_blank" rel="noopener">各种阶段性提议</a></p>
+<p>鉴于我们推荐谨慎地使用实验性的建议，Facebook在生产环境重度使用这些代码，所以我们打算提供<a href="https://medium.com/@cpojer/effective-javascript-codemods-5a6686bb46fb" target="_blank" rel="noopener">编码范式</a>，如果这些提议在将来更改的话。</p>
+<p>请清楚一点，<strong>这个项目仅仅包含很少一部分ES6</strong> <a href="https://en.wikipedia.org/wiki/Polyfill" target="_blank" rel="noopener">polyfills</a>:</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign" target="_blank" rel="noopener">Object.assign()</a> 基于 <a href="https://github.com/sindresorhus/object-assign" target="_blank" rel="noopener">object-assign</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank" rel="noopener">Promise</a> 基于 <a href="https://github.com/then/promise" target="_blank" rel="noopener">promise</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank" rel="noopener">fetch()</a> 基于 <a href="https://github.com/github/fetch" target="_blank" rel="noopener">whatwg-fetch</a></li>
+</ul>
+<p>如果你是用其他ES6+的特性需要 <strong>runtime支持</strong> (such as Array.from() or Symbol), 确定你已经手动包含了相应的polyfills，或者你要运行的浏览器已然支持这些特性</p>
+<h3 id="编辑器语法高亮"><a href="#编辑器语法高亮" class="headerlink" title="编辑器语法高亮"></a>编辑器语法高亮</h3><p>要在你喜爱的编辑器中配置语法高亮，请参照<a href="https://babeljs.io/docs/en/editors/" target="_blank" rel="noopener">babel的相关文档</a>并且遵循相应的指引，文档指引包含了好几个流行的编辑器。</p>
+<h3 id="在编辑器中展示lint"><a href="#在编辑器中展示lint" class="headerlink" title="在编辑器中展示lint"></a>在编辑器中展示lint</h3><blockquote>
+<p>注意：这个特性依赖<code>react-scripts#0.2.0</code>以上和npm 3以上</p>
+</blockquote>
+<p>一些编辑器，Sublime Text，Atom，和Visual Studio Code，提供ESLint插件。</p>
+<p>它们本省并不需要linting. 你可以在你的终端和浏览器console中看到linter。但是，如果你更喜欢在编辑器内部看到lint结果，你需要一些额外的步骤。</p>
+<p>你需要为你的编辑器安装一个ESLint插件。然后在根目录添加一个<code>.eslintrc</code>文件：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"extends"</span>: <span class="string">"react-app"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>现在你的编辑器可以看到linting 警告了</p>
+<p>要说明一点，即使你将来编辑了你的<code>eslintrc</code>，终端和编辑器console中的lint不会变。因为Create React App有意提供一个mini规则集，用于发现一些常见错误。</p>
+<p>如果你希望project强制使用一个编码锋哥，考虑使用<a href="https://github.com/prettier/prettier" target="_blank" rel="noopener">Prettier</a>取代ESLint规则。</p>
+<h3 id="在编辑器中调试"><a href="#在编辑器中调试" class="headerlink" title="在编辑器中调试"></a>在编辑器中调试</h3><p><strong>这个特性目前仅仅被<a href="https://code.visualstudio.com/" target="_blank" rel="noopener">Visual Studio Code</a>和<a href="https://www.jetbrains.com/webstorm/" target="_blank" rel="noopener">WebStorm</a>支持</strong></p>
+<h4 id="Visual-Studio-Code"><a href="#Visual-Studio-Code" class="headerlink" title="Visual Studio Code"></a>Visual Studio Code</h4><p>你需要最新版本的<a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VS code</a>和VS code <a href="https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome" target="_blank" rel="noopener">chrome调试插件</a></p>
+<p>然后添加下面的代码到你的<code>launch.json</code>文件并且将它放到<code>.vscode</code>文件夹，在你的app根目录中。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"version"</span>: <span class="string">"0.2.0"</span>,</span><br><span class="line">  <span class="string">"configurations"</span>: [&#123;</span><br><span class="line">    <span class="string">"name"</span>: <span class="string">"Chrome"</span>,</span><br><span class="line">    <span class="string">"type"</span>: <span class="string">"chrome"</span>,</span><br><span class="line">    <span class="string">"request"</span>: <span class="string">"launch"</span>,</span><br><span class="line">    <span class="string">"url"</span>: <span class="string">"http://localhost:3000"</span>,</span><br><span class="line">    <span class="string">"webRoot"</span>: <span class="string">"$&#123;workspaceRoot&#125;/src"</span>,</span><br><span class="line">    <span class="string">"sourceMapPathOverrides"</span>: &#123;</span><br><span class="line">      <span class="string">"webpack:///src/*"</span>: <span class="string">"$&#123;webRoot&#125;/*"</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：如果你更改了<a href="https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#folder-structure" target="_blank" rel="noopener">HOST或者PORT环境变量</a>，URL的值会和上面的不同</p>
+</blockquote>
+<p>运行<code>npm start</code>启用你的app，按<code>F5</code>或者点击绿色的调试图标，开始调试。你现在可以写代码，设断点，调试你新写的代码 —— 全部由编辑器自动处理。</p>
+<h4 id="WebStorm"><a href="#WebStorm" class="headerlink" title="WebStorm"></a>WebStorm</h4><p>略</p>
+<h3 id="自动格式化代码"><a href="#自动格式化代码" class="headerlink" title="自动格式化代码"></a>自动格式化代码</h3><p>Prettier是一个主动的代码格式化工具，支持js，css和JSON。使用Prettier可以自动格式化代码，保证工程内部代码格式一致。查看更多，请到<a href="https://github.com/prettier/prettier" target="_blank" rel="noopener">Prettier github 官网</a>，要看具体介绍，请到<a href="https://prettier.io/" target="_blank" rel="noopener">Prettier 官网</a></p>
+<p>如果想要当我们git commit的时候就format代码，我们需要装载下面的依赖：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save husky lint-staged prettier</span><br></pre></td></tr></table></figure></p>
+<p>当然，也可以用yarn<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add husky lint-staged prettier</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><code>husky</code> 使通过npm脚本使用githooks更加简单</li>
+<li><code>lint-staged</code> 允许我们对git 暂存区资料运行脚本。参考<a href="yarn add husky lint-staged prettier">学习使用lint-staged的blog</a></li>
+<li><code>prettier</code>是一个js格式化工具，我们会在commits之前运行</li>
+</ul>
+<p>现在我们可以确保所有文件会被正确的格式化，当我们在工程根目录的<code>package.json</code>中添加几行之后。</p>
+<p>将下面的代码添加到<code>scripts</code>区域:<br><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  "scripts": &#123;</span><br><span class="line"><span class="addition">+   "precommit": "lint-staged",</span></span><br><span class="line">    "start": "react-scripts start",</span><br><span class="line">    "build": "react-scripts build",</span><br></pre></td></tr></table></figure></p>
+<p>下面我们添加一个<code>lint-staged</code>区域到<code>package.json</code>中，例如：<br><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">  "dependencies": &#123;</span><br><span class="line">    // ...</span><br><span class="line">  &#125;,</span><br><span class="line"><span class="addition">+ "lint-staged": &#123;</span></span><br><span class="line"><span class="addition">+   "src/**/*.&#123;js,jsx,json,css&#125;": [</span></span><br><span class="line"><span class="addition">+     "prettier --single-quote --write",</span></span><br><span class="line"><span class="addition">+     "git add"</span></span><br><span class="line"><span class="addition">+   ]</span></span><br><span class="line"><span class="addition">+ &#125;,</span></span><br><span class="line">  "scripts": &#123;</span><br></pre></td></tr></table></figure></p>
+<p>现在，当你提交了一个commit，Prettier将会自动格式化变化的文件。第一次你还可以运行<code>./node_modules/.bin/prettier --single-quote --write &quot;src/**/*.{js,jsx,json,css}&quot;</code>来格式化整个项目</p>
+<p>下一步你可能想要将Prettier整合到你喜欢的编辑器。请阅读<a href="https://prettier.io/docs/en/editors.html" target="_blank" rel="noopener">prettier编辑器接入</a></p>
+<h3 id="更新页面的-lt-title-gt"><a href="#更新页面的-lt-title-gt" class="headerlink" title="更新页面的&lt;title&gt;"></a>更新页面的<code>&lt;title&gt;</code></h3><p>你可以在生成工程的<code>public</code>文件夹找到HTML文件，然后编辑<code>&lt;title&gt;</code>标签，更新成你想要的。</p>
+<p>注意一般情况下不需要频繁编辑public中的文件。例如，<a href="https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-a-stylesheet" target="_blank" rel="noopener">添加一个样式表</a>不需要编辑public中的HTML就可以做到</p>
+<p>如果你需要基于内容动态更新页面标题，可以使用浏览器<code>document.title</code>API。或者更复杂的情景，当你想要根据React组件更新标题的时候，你可以使用<a href="https://github.com/nfl/react-helmet" target="_blank" rel="noopener">React Helmet</a>，一个第三方库</p>
+<p>如果你再正式环境使用定制化服务并且想要页面在发送到浏览器之前更改标题，你可以遵循<a href="https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#generating-dynamic-meta-tags-on-the-server" target="_blank" rel="noopener">这个地方</a>的建议。另外，可以预编译每个页面至静态html文件，参考资料在<a href="https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#pre-rendering-into-static-html-files" target="_blank" rel="noopener">这里</a></p>
+<h3 id="装载依赖"><a href="#装载依赖" class="headerlink" title="装载依赖"></a>装载依赖</h3><p>生成的项目默认包含React和ReactDOM依赖。当然也包含一系列Create React App开发幻境用到的一系列依赖。你使用可以装在其他依赖（例如：React Router）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save react-router</span><br></pre></td></tr></table></figure></p>
+<p>当然还可以用yarn：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add react-router</span><br></pre></td></tr></table></figure></p>
+<p>这种方式适用于任何库，不仅仅是<code>react-router</code></p>
+<h3 id="引入组件"><a href="#引入组件" class="headerlink" title="引入组件"></a>引入组件</h3><p>幸亏有Babel，这个项目支持ES6模块。</p>
+<p>同时，你依然可以使用<code>require()</code>和<code>module.exports</code>，但我们建议你用<a href="http://exploringjs.com/es6/ch_modules.html" target="_blank" rel="noopener">import 和 export</a>取代它。</p>
+<p>例如：</p>
+<h4 id="Button-js"><a href="#Button-js" class="headerlink" title="Button.js"></a><code>Button.js</code></h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Button</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Button; <span class="comment">// Don’t forget to use export default!</span></span><br></pre></td></tr></table></figure>
+<h4 id="DangerButton-js"><a href="#DangerButton-js" class="headerlink" title="DangerButton.js"></a><code>DangerButton.js</code></h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> Button <span class="keyword">from</span> <span class="string">'./Button'</span>; <span class="comment">// Import a component from another file</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DangerButton</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">Button</span> <span class="attr">color</span>=<span class="string">"red"</span> /&gt;</span>;</span></span><br><span class="line"><span class="xml">  &#125;</span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">export default DangerButton;</span></span><br></pre></td></tr></table></figure>
+<p>请认清 <a href="https://stackoverflow.com/questions/36795819/when-should-i-use-curly-braces-for-es6-import/36796281#36796281" target="_blank" rel="noopener">default和命名的exports之间的区别</a>。这是常见的导致错误的根源。</p>
+<p>我们建议，当exports仅仅一个东东的时候，使用default imports和exports（例如，一个组件）。</p>
+<p>当一个实例需要export几个函数的时候，命名的exports就非常有用了。一个模块可以有至多一个default export和任意数量的命名export</p>
+<p>学习更多ES6模块化：</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/36795819/when-should-i-use-curly-braces-for-es6-import/36796281#36796281" target="_blank" rel="noopener">什么时候使用大括号</a></li>
+<li><a href="http://exploringjs.com/es6/ch_modules.html" target="_blank" rel="noopener">探索ES6: 模块</a></li>
+<li><a href="https://leanpub.com/understandinges6/read#leanpub-auto-encapsulating-code-with-modules" target="_blank" rel="noopener">理解ES6: 模块</a></li>
+</ul>
+<h3 id="代码拆分"><a href="#代码拆分" class="headerlink" title="代码拆分"></a>代码拆分</h3><p>区别于每次加载全部的app代码之后，用户才能使用，代码拆分允许你将代码拆成小的代码块，按需加载</p>
+<p>示例如下：</p>
+<p><strong>moduleA.js</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> moduleA = <span class="string">`Hello`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123; moduleA &#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>App.js</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  handleClick = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">import</span>(<span class="string">'./moduleA'</span>)</span><br><span class="line">      .then(<span class="function">(<span class="params">&#123; moduleA &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// Use moduleA</span></span><br><span class="line">      &#125;)</span><br><span class="line">      .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// Handle failure</span></span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;button onClick=&#123;<span class="keyword">this</span>.handleClick&#125;&gt;Load&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure></p>
+<p>这种写法，只有在用户点击‘load’button的时候，才会加载<code>moduleA.js</code></p>
+<p>你还可以使用async/await 语法，如果你喜欢用的话</p>
+<h4 id="结合React-Router"><a href="#结合React-Router" class="headerlink" title="结合React Router"></a>结合React Router</h4><p>如果你使用React Router进行代码拆分，请参照<a href="http://serverless-stack.com/chapters/code-splitting-in-create-react-app.html" target="_blank" rel="noopener">这个教程</a>。还有相关的<a href="https://github.com/AnomalyInnovations/serverless-stack-demo-client/tree/code-splitting-in-create-react-app" target="_blank" rel="noopener">github repo</a></p>
+<p>还有，看一下React文档中关于<a href="https://reactjs.org/docs/code-splitting.html" target="_blank" rel="noopener">代码区分的部分</a></p>
+<h3 id="添加样式表"><a href="#添加样式表" class="headerlink" title="添加样式表"></a>添加样式表</h3><p>这个项目使用<a href="https://webpack.js.org/" target="_blank" rel="noopener">Webpack</a>处理所有的样式。Webpack提供了一个定制化的方法，拓展了<code>import</code>概念，可以引入css。为了表明一个js依赖一个css，你需要 <strong>在js中import相应的css</strong></p>
+<p><strong>Button.css</strong><br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.Button</span> &#123;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>Button.js</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'./Button.css'</span>; <span class="comment">// Tell Webpack that Button.js uses these styles</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Button</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="comment">// You can use them as regular CSS styles</span></span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">"Button"</span> /&gt;</span>;</span></span><br><span class="line"><span class="xml">  &#125;</span></span><br><span class="line"><span class="xml">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>这不是一个React必须的模式</strong> 但是许多人发现这种特性非常方便。但是你需要了解到，这样做会让你的代码在使用其他打包工具的时候，不是那么轻便。</p>
+<p>在测试环境，使用这种方法表示依赖还会让你的样式更改，能飞快的通过reload来更新。在正式环境，所有的css文件会被结合成一个压缩过的<code>.css</code>文件</p>
+<p>如果你担心使用webpack特殊语义不太好，可以把你所有的css放到<code>src/index.css</code>文件。这样只会被<code>src/index.js</code>引入，当你迁移其他打包工具的话，很简单。</p>
+<h3 id="css后处理"><a href="#css后处理" class="headerlink" title="css后处理"></a>css后处理</h3><p>这个项目压缩css并且通过<a href="https://github.com/postcss/autoprefixer" target="_blank" rel="noopener">Autoprefixer</a>自动添加前缀，所以你不必担心这些东东<br>例如：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.App</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">flex-direction</span>: row;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.App</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: -webkit-box;</span><br><span class="line">  <span class="attribute">display</span>: -ms-flexbox;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">-webkit-box-orient</span>: horizontal;</span><br><span class="line">  <span class="attribute">-webkit-box-direction</span>: normal;</span><br><span class="line">      <span class="attribute">-ms-flex-direction</span>: row;</span><br><span class="line">          <span class="attribute">flex-direction</span>: row;</span><br><span class="line">  <span class="attribute">-webkit-box-align</span>: center;</span><br><span class="line">      <span class="attribute">-ms-flex-align</span>: center;</span><br><span class="line">          <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你想禁掉自动添加前缀，请参考<a href="https://github.com/postcss/autoprefixer#disabling" target="_blank" rel="noopener">此处</a></p>
+<h3 id="添加css预处理（Sass，Less等）"><a href="#添加css预处理（Sass，Less等）" class="headerlink" title="添加css预处理（Sass，Less等）"></a>添加css预处理（Sass，Less等）</h3><p>通常来说，我们不推荐你在不同的组件中复用相同的class。例如，与其在<code>&lt;AcceptButton&gt;</code>和<code>&lt;RejectButton&gt;</code>中使用一个<code>.Button</code>css类，我们更推荐创建一个<code>&lt;Button/&gt;</code>组件，拥有<code>.Button</code>css类，这样可以在<code>&lt;AcceptButton&gt;</code>和<code>&lt;RejectButton&gt;</code>中render(但<a href="https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#post-processing-css" target="_blank" rel="noopener">不要继承</a>)</p>
+<p>遵循以上规则，有时会让css预处理变得没多大用，主要是mixin和nesting被组件组合取代了。当然，如果你觉得预处理有用的话，可以完整的引入一个预处理。我们下面会使用sass演示，当然你可以使用less或其他类似的东东。</p>
+<p>首先，命令行装载一个sass的依赖：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save node-sass-chokidar</span><br></pre></td></tr></table></figure></p>
+<p>当然也可以用yarn啦<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add node-sass-chokidar</span><br></pre></td></tr></table></figure></p>
+<p>然后在<code>package.json</code>中，把下面的几行加到<code>scripts</code>：<br><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">   "scripts": &#123;</span><br><span class="line"><span class="addition">+    "build-css": "node-sass-chokidar src/ -o src/",</span></span><br><span class="line"><span class="addition">+    "watch-css": "npm run build-css &amp;&amp; node-sass-chokidar src/ -o src/ --watch --recursive",</span></span><br><span class="line">     "start": "react-scripts start",</span><br><span class="line">     "build": "react-scripts build",</span><br><span class="line">     "test": "react-scripts test --env=jsdom",</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意：用其他预处理的时候，将<code>watch-css</code>和<code>build-css</code>命令替换相应预处理文档中描述的命令</p>
+</blockquote>
+<p>现在你可以重命名<code>src/App.css</code>至<code>src/App.scss</code>，并运行<code>npm run watch-css</code>。监控器会监测src文件夹下面所有的sass文件，并紧挨着生成相应的css文件，在我们的例子里面就会覆盖原来的<code>src/App.css</code>。由于<code>src/App.js</code>引入的依然是<code>src/App.css</code>，所以样式依然会成为app的一部分。你现在可以编辑<code>src/App.scss</code>，然后<code>src/App.css</code>会自动更新。</p>
+<p>想要在不同的sass文件间公用变量，你可以使用Sass imports。例如：<code>src/App.scss</code>和其他组件样式可以引入<code>@import &quot;./shared.scss&quot;</code>；然后可以公用其中的变量定义。</p>
+<p>为了使用绝对路径引入文件，你可以在<code>package.json</code>的命令中加入<code>--include-path</code>选项。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"build-css"</span>: <span class="string">"node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/"</span>,</span><br><span class="line"><span class="string">"watch-css"</span>: <span class="string">"npm run build-css &amp;&amp; node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive"</span>,</span><br></pre></td></tr></table></figure></p>
+<p>这样可以让你像下面那样引入样式<br><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">import</span> <span class="string">'styles/_colors.scss'</span>; <span class="comment">// assuming a styles directory under src/</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">'nprogress/nprogress'</span>; <span class="comment">// importing a css file from the nprogress node module</span></span><br></pre></td></tr></table></figure></p>
+<p>这时候你可能想要让git忽略所有css文件，所以你可以在<code>.gitignore</code>中加入<code>src/**/*.css</code>。</p>
+<p>最后，你会发现当<code>npm start</code>的时候，自动<code>watch-css</code>非常方便，还有就是<code>npm run build</code>的时候<code>build-css</code>。你可以用一个<code>&amp;&amp;</code>操作符来分别执行两个脚本。但是没有一个跨平台的方法可以并行运行两个脚本命令，所以我们要装载一个npm包：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save npm-run-all</span><br></pre></td></tr></table></figure></p>
+<p>或者使用yarn<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add npm-run-all</span><br></pre></td></tr></table></figure></p>
+<p>然后我们可以更改<code>start</code>和<code>build</code>命令，使其包含css预处理的命令：<br><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">   "scripts": &#123;</span><br><span class="line">     "build-css": "node-sass-chokidar src/ -o src/",</span><br><span class="line">     "watch-css": "npm run build-css &amp;&amp; node-sass-chokidar src/ -o src/ --watch --recursive",</span><br><span class="line"><span class="deletion">-    "start": "react-scripts start",</span></span><br><span class="line"><span class="deletion">-    "build": "react-scripts build",</span></span><br><span class="line"><span class="addition">+    "start-js": "react-scripts start",</span></span><br><span class="line"><span class="addition">+    "start": "npm-run-all -p watch-css start-js",</span></span><br><span class="line"><span class="addition">+    "build-js": "react-scripts build",</span></span><br><span class="line"><span class="addition">+    "build": "npm-run-all build-css build-js",</span></span><br><span class="line">     "test": "react-scripts test --env=jsdom",</span><br><span class="line">     "eject": "react-scripts eject"</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>现在运行<code>npm start</code>和<code>npm run build</code>同时可以打包Sass文件。</p>
+<p><strong>为什么使用node-sass-chokibar</strong></p>
+<p><code>node-sass</code>有下面一些issues：</p>
+<ul>
+<li><code>node-sass --watch</code>在虚拟机或者docker环境下有性能issues</li>
+<li>不断的编译<a href="https://github.com/facebook/create-react-app/issues/1939" target="_blank" rel="noopener">#1939</a></li>
+<li>检测到文件夹下面的新文件时，会有issues，<a href="https://github.com/sass/node-sass/issues/1891" target="_blank" rel="noopener">#1891</a></li>
+</ul>
+<h3 id="添加图片，文字，和文件"><a href="#添加图片，文字，和文件" class="headerlink" title="添加图片，文字，和文件"></a>添加图片，文字，和文件</h3><p>用webpack打包，类似于图片和文字这样的静态资源的方式和css非常类似</p>
+<p>你可以在 <strong>一个js模块中<code>import</code>一个文件</strong>。这相当于告诉webpack打包的时候将该文件包含在内。和引入css不同，引入文件拿到的是一个字符串值。这个值是最终关联到你的代码中的最终路径。例如：image的src属性或PDF的href属性。</p>
+<p>为了减少服务端的请求，少于10000字节的图片会返回一个<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs" target="_blank" rel="noopener">data URI</a>而不是一个路径。这个默认设置会对下面的文件生效：bmp，gif，jpg，jpeg，和png。SVG文件不包含在内，因为<a href="https://github.com/facebookincubator/create-react-app/issues/1153" target="_blank" rel="noopener">#1153</a></p>
+<p>这里是一个例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> logo <span class="keyword">from</span> <span class="string">'./logo.png'</span>; <span class="comment">// Tell Webpack this JS file uses this image</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(logo); <span class="comment">// /logo.84287d09.png</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Header</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Import result is the URL of your image</span></span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&#123;logo&#125;</span> <span class="attr">alt</span>=<span class="string">"Logo"</span> /&gt;</span>;</span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">export default Header;</span></span><br></pre></td></tr></table></figure></p>
+<p>这样保证当工程被打包的时候，Webpack将会把图片放到build文件夹下，并且给我们提供正确的路径。</p>
+<p>在css中也是一样的：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.Logo</span> &#123;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(./logo.png);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>webpack会找到所有css里面的相对路径并且编译的时候将他们替换成最终的路径。如果你拼写错误或者不小心删掉了一个文件，你将会看到一个编译错误，就像你引入了一个不存在的Javascript模块一样。最终的文件名会包含webpack生成的内容hash值。如果文件内容更新的话，webpack会更新文件名，所以不用担心资源的持久化缓存。</p>
+<p>请认清一点，这只不过是webpack的一个定制化特性</p>
+<p><strong>这种方式并不是React必需的</strong>，但是许多人喜欢用它(React Native用了类似的图片处理技术)。另外一种处理静态资源的方法将会在下一节描述</p>
+<h3 id="使用public文件夹"><a href="#使用public文件夹" class="headerlink" title="使用public文件夹"></a>使用<code>public</code>文件夹</h3><blockquote>
+<p>注意：这个特性在<a href="mailto:react@0.5.0" target="_blank" rel="noopener">react@0.5.0</a>版本或以上可用</p>
+</blockquote>
+<h4 id="更新public文件夹的html"><a href="#更新public文件夹的html" class="headerlink" title="更新public文件夹的html"></a>更新public文件夹的html</h4><p>html就在public文件夹下面，所以你可以动它，例如，设置标题。包含编译代码的<code>&lt;script /&gt;</code>标签在编译过程中会被自动加进html。</p>
+<h4 id="在模块外部添加静态资源"><a href="#在模块外部添加静态资源" class="headerlink" title="在模块外部添加静态资源"></a>在模块外部添加静态资源</h4><p>你可以添加其他静态资源到<code>public</code>文件夹</p>
+<p>注意我们一般建议在js文件中<code>import</code>静态资源。例如：<a href="https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-a-stylesheet" target="_blank" rel="noopener">添加样式表</a>，<a href="https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-images-fonts-and-files" target="_blank" rel="noopener">添加图片，文字</a>。这种技术可以提供如下优势：</p>
+<ul>
+<li>脚本和样式被压缩和打包到了一起，减少额外的网络请求</li>
+<li>文件少了之后，直接在编译阶段报错，而不是曝露给用户404</li>
+<li>文件名包含内容哈希，所以不必担心浏览器缓存它的旧版本</li>
+</ul>
+<p>然而依然有另外一个 <strong>出口</strong>，你可以在模块系统外部添加静态资源。</p>
+<p>如果你将一个文件放到<code>public</code>文件夹，它不会被webpack处理。另外就是它会原封不动地被复制到build文件夹中。为了关联<code>public</code>文件夹下面的静态资源，你需要使用一个特殊的变量-<code>PUBLIC_URL</code></p>
+<p>在<code>index.html</code>中，你可以像下面一样使用它：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"shortcut icon"</span> <span class="attr">href</span>=<span class="string">"%PUBLIC_URL%/favicon.ico"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>只有包含在<code>public</code>文件夹下面才会被<code>%PUBLIC_URL%</code>前缀解析到。如果你需要使用<code>src</code>或<code>node_modules</code>下面的文件，你必须复制它到<code>public</code>文件夹，并详细说明你的意图。</p>
+<p>当你运行<code>npm run build</code>，Create React App会将<code>%PUBLIC_URL%</code>替换成一个正确的绝对路径，因此，即使使用客户端路由，工程也能正常运行。</p>
+<p>在js代码中，你可以使用<code>process.env.PUBLIC_URL</code>，达到相同的目的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">  <span class="comment">// Note: this is an escape hatch and should be used sparingly!</span></span><br><span class="line">  <span class="comment">// Normally we recommend using `import` for getting asset URLs</span></span><br><span class="line">  <span class="comment">// as described in “Adding Images and Fonts” above this section.</span></span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&#123;process.env.PUBLIC_URL</span> + '/<span class="attr">img</span>/<span class="attr">logo.png</span>'&#125; /&gt;</span>;</span></span><br><span class="line"><span class="xml">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>请注意以下几点：</p>
+<ul>
+<li>在<code>public</code>文件夹下面不会被预处理或者压缩</li>
+<li>如果文件不存在，编译的时候并不会告知用户，并且会抛出一个404给用户</li>
+<li>这里的文件名不会包含hash值，所以每次文件改动之后需要加一个查询参数，或者更换文件名</li>
+</ul>
+<h4 id="什么时候使用public文件夹"><a href="#什么时候使用public文件夹" class="headerlink" title="什么时候使用public文件夹"></a>什么时候使用<code>public</code>文件夹</h4><p>一般情况下我们推荐从js中引入样式表，图片和字体。<code>public</code>文件夹用于处理一些不常见的case。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/create-react-app/" rel="tag"># create-react-app</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/03/接口规范初探/" rel="next" title="接口规范初探">
+                <i class="fa fa-chevron-left"></i> 接口规范初探
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/27/管理智慧/" rel="prev" title="管理智慧">
+                管理智慧 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">乱世天狼</p>
+              <p class="site-description motion-element" itemprop="description">乱世天狼 | 前端 | html | css | html5 | css3 | react | redux | webpack | 哲学 | 精神 | 生活</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引子"><span class="nav-number">1.</span> <span class="nav-text">引子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#武陵春·春晚"><span class="nav-number">1.1.</span> <span class="nav-text">武陵春·春晚</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#更新新版本"><span class="nav-number">2.1.</span> <span class="nav-text">更新新版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反馈"><span class="nav-number">2.2.</span> <span class="nav-text">反馈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录结构"><span class="nav-number">2.3.</span> <span class="nav-text">目录结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可用的一些脚本"><span class="nav-number">2.4.</span> <span class="nav-text">可用的一些脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#支持的浏览器"><span class="nav-number">2.5.</span> <span class="nav-text">支持的浏览器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#支持的语言特性和polyfills"><span class="nav-number">2.6.</span> <span class="nav-text">支持的语言特性和polyfills</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑器语法高亮"><span class="nav-number">2.7.</span> <span class="nav-text">编辑器语法高亮</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在编辑器中展示lint"><span class="nav-number">2.8.</span> <span class="nav-text">在编辑器中展示lint</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在编辑器中调试"><span class="nav-number">2.9.</span> <span class="nav-text">在编辑器中调试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Visual-Studio-Code"><span class="nav-number">2.9.1.</span> <span class="nav-text">Visual Studio Code</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WebStorm"><span class="nav-number">2.9.2.</span> <span class="nav-text">WebStorm</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动格式化代码"><span class="nav-number">2.10.</span> <span class="nav-text">自动格式化代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新页面的-lt-title-gt"><span class="nav-number">2.11.</span> <span class="nav-text">更新页面的&lt;title&gt;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#装载依赖"><span class="nav-number">2.12.</span> <span class="nav-text">装载依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引入组件"><span class="nav-number">2.13.</span> <span class="nav-text">引入组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Button-js"><span class="nav-number">2.13.1.</span> <span class="nav-text">Button.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DangerButton-js"><span class="nav-number">2.13.2.</span> <span class="nav-text">DangerButton.js</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码拆分"><span class="nav-number">2.14.</span> <span class="nav-text">代码拆分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#结合React-Router"><span class="nav-number">2.14.1.</span> <span class="nav-text">结合React Router</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加样式表"><span class="nav-number">2.15.</span> <span class="nav-text">添加样式表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#css后处理"><span class="nav-number">2.16.</span> <span class="nav-text">css后处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加css预处理（Sass，Less等）"><span class="nav-number">2.17.</span> <span class="nav-text">添加css预处理（Sass，Less等）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加图片，文字，和文件"><span class="nav-number">2.18.</span> <span class="nav-text">添加图片，文字，和文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用public文件夹"><span class="nav-number">2.19.</span> <span class="nav-text">使用public文件夹</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#更新public文件夹的html"><span class="nav-number">2.19.1.</span> <span class="nav-text">更新public文件夹的html</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在模块外部添加静态资源"><span class="nav-number">2.19.2.</span> <span class="nav-text">在模块外部添加静态资源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#什么时候使用public文件夹"><span class="nav-number">2.19.3.</span> <span class="nav-text">什么时候使用public文件夹</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">乱世天狼</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

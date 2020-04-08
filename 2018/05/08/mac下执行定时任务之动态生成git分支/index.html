@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="mac git,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="问题我在 5 月 7 号创建了一个 qa/20180509 分支，然而 5 月 9 号并不是一个发版日（我们的发版日是二，四，日）。最后重新从 master 拉了一个 qa/20180508 解决问题，这样会导致其他同学要把自己代码重新合到新的 qa/20180508 分支，这，很有问题。如果项目开发人员很多，这样就要浪费掉很多的沟通成本。解决问题有两种，一是细心一点，发版日的前一个工作日早上上班">
+<meta name="keywords" content="mac git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mac下执行定时任务之动态生成git分支">
+<meta property="og:url" content="http://bullyork.github.io/2018/05/08/mac下执行定时任务之动态生成git分支/index.html">
+<meta property="og:site_name" content="缘来我们在这里">
+<meta property="og:description" content="问题我在 5 月 7 号创建了一个 qa/20180509 分支，然而 5 月 9 号并不是一个发版日（我们的发版日是二，四，日）。最后重新从 master 拉了一个 qa/20180508 解决问题，这样会导致其他同学要把自己代码重新合到新的 qa/20180508 分支，这，很有问题。如果项目开发人员很多，这样就要浪费掉很多的沟通成本。解决问题有两种，一是细心一点，发版日的前一个工作日早上上班">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-13T03:12:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mac下执行定时任务之动态生成git分支">
+<meta name="twitter:description" content="问题我在 5 月 7 号创建了一个 qa/20180509 分支，然而 5 月 9 号并不是一个发版日（我们的发版日是二，四，日）。最后重新从 master 拉了一个 qa/20180508 解决问题，这样会导致其他同学要把自己代码重新合到新的 qa/20180508 分支，这，很有问题。如果项目开发人员很多，这样就要浪费掉很多的沟通成本。解决问题有两种，一是细心一点，发版日的前一个工作日早上上班">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://bullyork.github.io/2018/05/08/mac下执行定时任务之动态生成git分支/">
+
+
+
+
+
+  <title>mac下执行定时任务之动态生成git分支 | 缘来我们在这里</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">缘来我们在这里</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">乱世天狼的博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bullyork.github.io/2018/05/08/mac下执行定时任务之动态生成git分支/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乱世天狼">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="缘来我们在这里">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">mac下执行定时任务之动态生成git分支</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-08T23:36:25+08:00">
+                2018-05-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>我在 5 月 7 号创建了一个 qa/20180509 分支，然而 5 月 9 号并不是一个发版日（我们的发版日是二，四，日）。最后重新从 master 拉了一个 qa/20180508 解决问题，这样会导致其他同学要把自己代码重新合到新的 qa/20180508 分支，这，很有问题。如果项目开发人员很多，这样就要浪费掉很多的沟通成本。解决问题有两种，一是细心一点，发版日的前一个工作日早上上班立马创建一个正确版本的分支。二是用程序解决这个问题，让一切自动化的执行。</p>
+<h3 id="分析问题"><a href="#分析问题" class="headerlink" title="分析问题"></a>分析问题</h3><p>我选择第二个方案，因为我粗心，而且懒。。。</p>
+<p><strong>一、创建 qa 分支的逻辑</strong></p>
+<p>创建 qa 分支的目的是为了测试用于发布的代码。如果提前二个版本日创建，例如周二创建周四的 qa 分支，这会导致周二的测试代码同步到周四，但周二大部分测试代码周二就会被发掉，也就是说合并到 master。而且 master 也会有一些 hotfix，这些都不会同步到周四的测试分支上，这很僵硬。所以最好就是提前一个版本创建。也就是说最好周三早上创建一个从 master 出来的干净的测试分支。</p>
+<p><strong>二、自动化方式的逻辑</strong></p>
+<p>那么怎么通过自动化解决呢？如果开机启动，执行一次，那么 mac 如果不关机，下次就会失效，所以最好是连上公司 wifi 的那一刻，执行自动化的脚本。还有一种简单粗暴的办法是，每隔一段时间执行一次，我这里暂时使用了这种粗暴的方法，每隔一个小时执行一次脚本。因为检测公司 wifi 这个还要细探。</p>
+<p><strong>三、自动化脚本的逻辑</strong></p>
+<p>脚本使用的是 shell 脚本，用其他脚本最后还要使用 shell 调用，感觉更麻烦些，所以直接采用 shell 脚本</p>
+<ol>
+<li>判断当前是不是发版日</li>
+<li>如果是，判断下个版本的 qa 分支有没有远端分支；如果否，退出</li>
+<li>如果是，退出；如果否，判断下个版本的 qa 分支有没有本地分支</li>
+<li>如果是，直接推到远端(逻辑不严谨，但情况不多，有的话是人为的)。如果否，切换到 master，拉取最新代码，创建本地分支，推送远端。</li>
+</ol>
+<p><strong>四、自动化工具</strong></p>
+<p><a href="https://sspai.com/post/37258" target="_blank" rel="noopener">利用 Launchd 定制 Mac 启动任务</a></p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>cd ~/Library/LaunchAgents</p>
+<p>touch com.baidi.plist</p>
+<p>launchctl load com.baidi.plist</p>
+<p>launchctl start com.baidi.plist</p>
+<p>plist 内容如下</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">plist</span> <span class="attr">version</span>=<span class="string">"1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">key</span>&gt;</span>Label<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">string</span>&gt;</span>com.baidi.wificheck<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">key</span>&gt;</span>Program<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">string</span>&gt;</span>/Users/xxc/pdd/study/auto/run.sh<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">key</span>&gt;</span>StartInterval<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">integer</span>&gt;</span>3600<span class="tag">&lt;/<span class="name">integer</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">key</span>&gt;</span>RunAtLoad<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plist</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>run.sh 内容如下</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="function"><span class="title">editionDay</span></span>()&#123;</span><br><span class="line">  <span class="keyword">for</span> DAY <span class="keyword">in</span> 2 4 0</span><br><span class="line">  <span class="keyword">do</span></span><br><span class="line">    WEEK_DAY=$(date +%w)</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">test</span> <span class="variable">$WEEK_DAY</span> -eq <span class="variable">$DAY</span></span><br><span class="line">    <span class="keyword">then</span></span><br><span class="line">      <span class="built_in">return</span> 1</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">  <span class="keyword">done</span></span><br><span class="line">  <span class="built_in">return</span> 0</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"-----函数开始执行-----"</span></span><br><span class="line">WEEK_DAY=$(date +%w)</span><br><span class="line">editionDay</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">test</span> $? = 0</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">  EDITION=<span class="string">''</span></span><br><span class="line">  <span class="keyword">if</span> <span class="built_in">test</span> <span class="variable">$WEEK_DAY</span> -eq 5</span><br><span class="line">  <span class="keyword">then</span></span><br><span class="line">    EDITION=$(date -v +2d +%Y%m%d)</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    EDITION=$(date -v +1d +%Y%m%d)</span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">  QABRANCH=<span class="string">'qa/'</span><span class="variable">$EDITION</span></span><br><span class="line">  <span class="built_in">cd</span> /Users/xxc/pdd/mobile-merchant</span><br><span class="line">  RESULT=$(git branch -r | grep <span class="variable">$QABRANCH</span>)</span><br><span class="line">  RESULT2=$(git branch | grep <span class="variable">$QABRANCH</span>)</span><br><span class="line">  <span class="keyword">if</span> [ ! <span class="variable">$RESULT</span> ]</span><br><span class="line">    <span class="keyword">then</span></span><br><span class="line">    <span class="keyword">if</span> [ ! <span class="variable">$RESULT2</span> ]</span><br><span class="line">      <span class="keyword">then</span></span><br><span class="line">      git checkout master</span><br><span class="line">      git pull</span><br><span class="line">      git checkout -b <span class="variable">$QABRANCH</span></span><br><span class="line">      git push --<span class="built_in">set</span>-upstream origin <span class="variable">$QABRANCH</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      git checkout master</span><br><span class="line">      git pull</span><br><span class="line">      git checkout <span class="variable">$QABRANCH</span></span><br><span class="line">      git rebase master</span><br><span class="line">      git push --<span class="built_in">set</span>-upstream origin <span class="variable">$QABRANCH</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">'远端分支已存在'</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"-----函数执行完毕-----"</span></span><br></pre></td></tr></table></figure>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>改进一下可以自动生成更多版本控制的分支，比如 dev or release。自动化可以做很多事情， 比如：定时提醒自己去美餐网点餐。想要做的可以搞起来哦。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mac-git/" rel="tag"># mac git</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/01/mac安装虚拟机/" rel="next" title="mac安装win7虚拟机">
+                <i class="fa fa-chevron-left"></i> mac安装win7虚拟机
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/09/long-term-cache/" rel="prev" title="long-term-cache">
+                long-term-cache <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">乱世天狼</p>
+              <p class="site-description motion-element" itemprop="description">乱世天狼 | 前端 | html | css | html5 | css3 | react | redux | webpack | 哲学 | 精神 | 生活</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析问题"><span class="nav-number">2.</span> <span class="nav-text">分析问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">3.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">4.</span> <span class="nav-text">其他</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">乱世天狼</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

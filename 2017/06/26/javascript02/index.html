@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="js,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="引子《康诰》曰：“克明德。”《太甲》曰：“顾諟天之明命。”《帝典》曰：“克明峻徳。”皆自明也。 –《大学》 script元素 async：表示应该立即下载脚本，但不阻塞页面其余caozuo charset：可选，指定src属性引入代码的字符集，大多数浏览器会忽略，所以很少人使用。 defer：可选，表示脚本可以延迟到文档完全被解析和显示之后再执行。只对外部脚本有效。IE7及之前版本，对嵌入脚">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在HTML中使用javascript">
+<meta property="og:url" content="http://bullyork.github.io/2017/06/26/javascript02/index.html">
+<meta property="og:site_name" content="缘来我们在这里">
+<meta property="og:description" content="引子《康诰》曰：“克明德。”《太甲》曰：“顾諟天之明命。”《帝典》曰：“克明峻徳。”皆自明也。 –《大学》 script元素 async：表示应该立即下载脚本，但不阻塞页面其余caozuo charset：可选，指定src属性引入代码的字符集，大多数浏览器会忽略，所以很少人使用。 defer：可选，表示脚本可以延迟到文档完全被解析和显示之后再执行。只对外部脚本有效。IE7及之前版本，对嵌入脚">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-13T03:12:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在HTML中使用javascript">
+<meta name="twitter:description" content="引子《康诰》曰：“克明德。”《太甲》曰：“顾諟天之明命。”《帝典》曰：“克明峻徳。”皆自明也。 –《大学》 script元素 async：表示应该立即下载脚本，但不阻塞页面其余caozuo charset：可选，指定src属性引入代码的字符集，大多数浏览器会忽略，所以很少人使用。 defer：可选，表示脚本可以延迟到文档完全被解析和显示之后再执行。只对外部脚本有效。IE7及之前版本，对嵌入脚">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://bullyork.github.io/2017/06/26/javascript02/">
+
+
+
+
+
+  <title>在HTML中使用javascript | 缘来我们在这里</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">缘来我们在这里</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">乱世天狼的博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bullyork.github.io/2017/06/26/javascript02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乱世天狼">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="缘来我们在这里">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">在HTML中使用javascript</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-26T23:18:34+08:00">
+                2017-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h3><p>《康诰》曰：“克明德。”《太甲》曰：“顾諟天之明命。”《帝典》曰：“克明峻徳。”皆自明也。</p>
+<p>–《大学》</p>
+<h3 id="script元素"><a href="#script元素" class="headerlink" title="script元素"></a>script元素</h3><ul>
+<li>async：表示应该立即下载脚本，但不阻塞页面其余caozuo</li>
+<li>charset：可选，指定src属性引入代码的字符集，大多数浏览器会忽略，所以很少人使用。</li>
+<li>defer：可选，表示脚本可以延迟到文档完全被解析和显示之后再执行。只对外部脚本有效。IE7及之前版本，对嵌入脚本也生效。</li>
+<li>language：已废弃</li>
+<li>src：可选，表示包含要执行代码的外部文件</li>
+<li>type：可选，可看作language属性的替代属性，表示编写代码使用脚本语言的内容类型(也称为MIME类型)</li>
+</ul>
+<h4 id="标签的位置"><a href="#标签的位置" class="headerlink" title="标签的位置"></a>标签的位置</h4><p>惯例是应该放在head元素中间，但这会导致script标签加载完之后，才会加载DOM内容，加载页面时会发生明显的延时。为了解决这一问题，一般把script标签防盗内容后面</p>
+<h4 id="延迟脚本"><a href="#延迟脚本" class="headerlink" title="延迟脚本"></a>延迟脚本</h4><p>defer属性告诉浏览器立即加载，但延迟执行！<br>如果有两个defer属性脚本，延迟脚本不一定会按顺序执行，也不一定会在DOMContentLoaded事件触发前执行，因此，最好</p>
+<h4 id="异步脚本"><a href="#异步脚本" class="headerlink" title="异步脚本"></a>异步脚本</h4><p>async属性高诉浏览器立即下载，但不保证执行的先后顺序。一定会在页面的load事件之前执行，但可能在DOMContentLoaded事件之前或者之后执行</p>
+<h4 id="在XHTML中的使用"><a href="#在XHTML中的使用" class="headerlink" title="在XHTML中的使用"></a>在XHTML中的使用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&apos;text/javascript&apos;&gt;</span><br><span class="line">  // &lt;![CDATA[</span><br><span class="line">    if(a &lt; b)&#123;</span><br><span class="line">      alert(&apos;a is less than b&apos;)</span><br><span class="line">    &#125;</span><br><span class="line">  // ]]&gt;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">这样是为了保证所有现代浏览器都可以正常使用</span><br></pre></td></tr></table></figure>
+<h4 id="不推荐使用的方法"><a href="#不推荐使用的方法" class="headerlink" title="不推荐使用的方法"></a>不推荐使用的方法</h4><p>不要用html注释注释脚本！</p>
+<h4 id="嵌入代码与外部文件"><a href="#嵌入代码与外部文件" class="headerlink" title="嵌入代码与外部文件"></a>嵌入代码与外部文件</h4><ul>
+<li>可维护性：所有js文件放到同一个文件夹中</li>
+<li>可缓存：浏览器根据设置缓存链接的所有js文件，也就是说如果两个页面使用同一个文件，那么这个文件只需下载一次。因此最终结果就是能够加快页面加载的速度。</li>
+<li>适应未来：通过外部文件来包含的javascript无须使用前面说过的hack技术，html和xhtml包含外部文件的语法是想通的</li>
+</ul>
+<h4 id="文档模式"><a href="#文档模式" class="headerlink" title="文档模式"></a>文档模式</h4><p>混杂模式：混杂模式会让IE的行为和ie5一致<br>标准模式：标准模式会让IE的行为更接近标准行为<br>准标准模式：很多行为符合标准，不标准的地方体现在处理突变间隙的时候</p>
+<p>标准模式开启方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">html4.01 严格型</span><br><span class="line">&lt;!DOCTYPE HTML PUBLIC &quot;-//w3c//DTD HTML 4.01//EN&quot;</span><br><span class="line">&quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;</span><br><span class="line"></span><br><span class="line">xhtml1.0 严格型</span><br><span class="line">&lt;!DOCTYPE HTML PUBLIC &quot;-//w3c//DTD XHTML 1.0 Strict//EN&quot;</span><br><span class="line">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>准标准模式开启可以使用过渡型(transitional)或框架集型(framset)文档类型来触发</p>
+<h4 id="noscript元素"><a href="#noscript元素" class="headerlink" title="noscript元素"></a>noscript元素</h4><p>noscript包裹的元素只有在下列条件下才会显示</p>
+<ul>
+<li>浏览器不支持脚本</li>
+<li>浏览器支持脚本，但脚本被禁用</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/26/javascript01/" rel="next" title="javascript简介 - 第一章">
+                <i class="fa fa-chevron-left"></i> javascript简介 - 第一章
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/27/javascript03/" rel="prev" title="基本概念">
+                基本概念 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">乱世天狼</p>
+              <p class="site-description motion-element" itemprop="description">乱世天狼 | 前端 | html | css | html5 | css3 | react | redux | webpack | 哲学 | 精神 | 生活</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#引子"><span class="nav-number">1.</span> <span class="nav-text">引子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#script元素"><span class="nav-number">2.</span> <span class="nav-text">script元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#标签的位置"><span class="nav-number">2.1.</span> <span class="nav-text">标签的位置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#延迟脚本"><span class="nav-number">2.2.</span> <span class="nav-text">延迟脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异步脚本"><span class="nav-number">2.3.</span> <span class="nav-text">异步脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在XHTML中的使用"><span class="nav-number">2.4.</span> <span class="nav-text">在XHTML中的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不推荐使用的方法"><span class="nav-number">2.5.</span> <span class="nav-text">不推荐使用的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#嵌入代码与外部文件"><span class="nav-number">2.6.</span> <span class="nav-text">嵌入代码与外部文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文档模式"><span class="nav-number">2.7.</span> <span class="nav-text">文档模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#noscript元素"><span class="nav-number">2.8.</span> <span class="nav-text">noscript元素</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">乱世天狼</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

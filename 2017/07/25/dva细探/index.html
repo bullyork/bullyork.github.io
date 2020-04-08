@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="dva,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="引子所谓致知在格物者，言欲致吾之知，在其物而穷其理也。盖人心之灵莫不有知，而天下之物莫不有理，唯于理有未穷，故其知又不尽也，是以《大学》始教，必使学者即凡于天下之物，莫不因其己知之理而益穷之，以求至乎其极。至于用力之久，而一旦豁然贯通焉，则众物之表里精粗无不到，而吾心之全体大用无不明矣。此谓物格，此谓知之至也。 –《大学》 dva是什么？dva 是一个基于 react 和 redux 的轻量应用框">
+<meta name="keywords" content="dva">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dva细探">
+<meta property="og:url" content="http://bullyork.github.io/2017/07/25/dva细探/index.html">
+<meta property="og:site_name" content="缘来我们在这里">
+<meta property="og:description" content="引子所谓致知在格物者，言欲致吾之知，在其物而穷其理也。盖人心之灵莫不有知，而天下之物莫不有理，唯于理有未穷，故其知又不尽也，是以《大学》始教，必使学者即凡于天下之物，莫不因其己知之理而益穷之，以求至乎其极。至于用力之久，而一旦豁然贯通焉，则众物之表里精粗无不到，而吾心之全体大用无不明矣。此谓物格，此谓知之至也。 –《大学》 dva是什么？dva 是一个基于 react 和 redux 的轻量应用框">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-13T03:12:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="dva细探">
+<meta name="twitter:description" content="引子所谓致知在格物者，言欲致吾之知，在其物而穷其理也。盖人心之灵莫不有知，而天下之物莫不有理，唯于理有未穷，故其知又不尽也，是以《大学》始教，必使学者即凡于天下之物，莫不因其己知之理而益穷之，以求至乎其极。至于用力之久，而一旦豁然贯通焉，则众物之表里精粗无不到，而吾心之全体大用无不明矣。此谓物格，此谓知之至也。 –《大学》 dva是什么？dva 是一个基于 react 和 redux 的轻量应用框">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://bullyork.github.io/2017/07/25/dva细探/">
+
+
+
+
+
+  <title>dva细探 | 缘来我们在这里</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">缘来我们在这里</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">乱世天狼的博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bullyork.github.io/2017/07/25/dva细探/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乱世天狼">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="缘来我们在这里">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">dva细探</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-25T11:28:30+08:00">
+                2017-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h3><p>所谓致知在格物者，言欲致吾之知，在其物而穷其理也。盖人心之灵莫不有知，而天下之物莫不有理，唯于理有未穷，故其知又不尽也，是以《大学》始教，必使学者即凡于天下之物，莫不因其己知之理而益穷之，以求至乎其极。至于用力之久，而一旦豁然贯通焉，则众物之表里精粗无不到，而吾心之全体大用无不明矣。此谓物格，此谓知之至也。</p>
+<p>–《大学》</p>
+<h3 id="dva是什么？"><a href="#dva是什么？" class="headerlink" title="dva是什么？"></a>dva是什么？</h3><p><a href="https://github.com/dvajs/dva-docs/blob/master/v1/zh-cn/getting-started.md" target="_blank" rel="noopener">dva</a> 是一个基于 react 和 redux 的轻量应用框架，概念来自 elm，支持 side effects、热替换、动态加载、react-native、SSR 等，已在生产环境广泛应用。</p>
+<h3 id="前提概要"><a href="#前提概要" class="headerlink" title="前提概要"></a>前提概要</h3><p><br>要有react，redux，react-router的基础，如果不具备，请自行到官网学习，过不去的话请自行翻墙，强烈建议去官网学习，否则道听途说，断章取义。<a href="https://facebook.github.io/react/" target="_blank" rel="noopener">react官网</a>，<a href="http://redux.js.org/" target="_blank" rel="noopener">redux官网</a>，<a href="https://reacttraining.com/react-router/" target="_blank" rel="noopener">react-router官网</a></p>
+<h3 id="react-router-redux是什么"><a href="#react-router-redux是什么" class="headerlink" title="react-router-redux是什么"></a>react-router-redux是什么</h3><p>查看dva源码，index中赫然引用了react-router-redux，这到底是干嘛的? 名字上看起来是react-router和redux的结合。那么到github上看下吧。<a href="https://github.com/reactjs/react-router-redux" target="_blank" rel="noopener">react-router-redux github地址</a>。</p>
+<p>这个库解决的问题：如果要回溯到之前的状态时，你重复触发之前的actions的时候，页面是不会跳转的，因为react-router只控制url的状态改变。所以和这个库让url状态和redux store同步。</p>
+<p><em>这个库只在你关心actions的记录，持久化和重演的过程时有用，如果你不关心这些的话，可以不用这个库！就用redux和react-router就好</em></p>
+<h3 id="createDva做了什么？"><a href="#createDva做了什么？" class="headerlink" title="createDva做了什么？"></a>createDva做了什么？</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">dva</span>(<span class="params">hooks = &#123;&#125;</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// history and initialState does not pass to plugin</span></span><br><span class="line">    <span class="keyword">const</span> history = hooks.history || defaultHistory;</span><br><span class="line">    <span class="keyword">const</span> initialState = hooks.initialState || &#123;&#125;;</span><br><span class="line">    <span class="keyword">delete</span> hooks.history;</span><br><span class="line">    <span class="keyword">delete</span> hooks.initialState;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> plugin = <span class="keyword">new</span> Plugin();</span><br><span class="line">    plugin.use(hooks);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> app = &#123;</span><br><span class="line">      <span class="comment">// properties</span></span><br><span class="line">      _models: [],</span><br><span class="line">      _router: <span class="literal">null</span>,</span><br><span class="line">      _store: <span class="literal">null</span>,</span><br><span class="line">      _history: <span class="literal">null</span>,</span><br><span class="line">      _plugin: plugin,</span><br><span class="line">      <span class="comment">// methods</span></span><br><span class="line">      use,</span><br><span class="line">      model,</span><br><span class="line">      router,</span><br><span class="line">      start,</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> app;</span><br><span class="line">    ...(各种方法)</span><br></pre></td></tr></table></figure>
+<p>所以createDva返回了一个函数，函数接受hooks为参数，返回一个携带各种方法的app对象，那么这些方法到底用来做什么的呢？</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>暂时延后方法描述，直接走使用环节</p>
+<h3 id="es6生成器-generator-详解"><a href="#es6生成器-generator-详解" class="headerlink" title="es6生成器(generator)详解"></a>es6生成器(generator)详解</h3><p>生成器使用<strong>function*</strong>和<strong>yield</strong>来简化迭代程序的编写。声明为<strong>function*</strong>的函数返回一个生成器实例。生成器是迭代器的子类型，继承了迭代器的 <strong>next</strong> 和 <strong>throw</strong>。这些特性可以使值反流回生成器，<strong>yield</strong>是一个返回值的表达式（或者使用<strong>throws</strong>）。</p>
+<p>注：还可以使‘await’等类异步编程的代码生效，可以查看ES7的await建议</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fibonacci = &#123;</span><br><span class="line">  [<span class="built_in">Symbol</span>.iterator]: <span class="function"><span class="keyword">function</span>*(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> pre = <span class="number">0</span>, cur = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">      <span class="keyword">var</span> temp = pre;</span><br><span class="line">      pre = cur;</span><br><span class="line">      cur += temp;</span><br><span class="line">      <span class="keyword">yield</span> cur;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> n <span class="keyword">of</span> fibonacci) &#123;</span><br><span class="line">  <span class="comment">// truncate the sequence at 1000</span></span><br><span class="line">  <span class="keyword">if</span> (n &gt; <span class="number">1000</span>)</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>生成器只能使用 typescript 类型语法描述<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Generator <span class="keyword">extends</span> Iterator &#123;</span><br><span class="line">    next(value?: <span class="built_in">any</span>): IteratorResult;</span><br><span class="line">    <span class="keyword">throw</span>(exception: <span class="built_in">any</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Symbol-和-iterator-迭代器-详解"><a href="#Symbol-和-iterator-迭代器-详解" class="headerlink" title="Symbol 和 iterator(迭代器)详解"></a>Symbol 和 iterator(迭代器)详解</h3><p>Symbol: 第七种基本类型（前六种：string，number，boolean，null，undefined，object）</p>
+<p>Symbol的主要作用是用来生成一个不可能重复的key，保证程序向下兼容！（否则新的key不知道是否被使用过）</p>
+<p>迭代器是一种为各种不同的数据结构提供统一的访问机制的接口。一个迭代器对象 ，知道如何每次访问集合中的一项， 并记录它的当前在序列中所在的位置。在  JavaScript 中 迭代器是一个对象，提供了一个 next()  方法，返回序列中的下一项。这个方法返回包含 done 和 value 两个属性的对象。</p>
+<p>迭代器支持 for of</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/dva/" rel="tag"># dva</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/17/npm/" rel="next" title="npm">
+                <i class="fa fa-chevron-left"></i> npm
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/17/moment/" rel="prev" title="moment">
+                moment <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">乱世天狼</p>
+              <p class="site-description motion-element" itemprop="description">乱世天狼 | 前端 | html | css | html5 | css3 | react | redux | webpack | 哲学 | 精神 | 生活</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#引子"><span class="nav-number">1.</span> <span class="nav-text">引子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dva是什么？"><span class="nav-number">2.</span> <span class="nav-text">dva是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前提概要"><span class="nav-number">3.</span> <span class="nav-text">前提概要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#react-router-redux是什么"><span class="nav-number">4.</span> <span class="nav-text">react-router-redux是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#createDva做了什么？"><span class="nav-number">5.</span> <span class="nav-text">createDva做了什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">6.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#es6生成器-generator-详解"><span class="nav-number">7.</span> <span class="nav-text">es6生成器(generator)详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Symbol-和-iterator-迭代器-详解"><span class="nav-number">8.</span> <span class="nav-text">Symbol 和 iterator(迭代器)详解</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">乱世天狼</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="微服务,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="引子此谓诚於中，形於外，故君子必慎其独也。 – 礼记·大学 前情概要传统的 web 开发并没有前后分离的概念，无论是 c#，还是 java，抑或是世界上最好的语言 PHP。大多是采用 cshtml，或者 jsp 作为模版，当作 view 层。这时候的前端扮演的角色很有限，通常工作流是前端根据设计还原出页面（html）。然后使用 js 制作动态效果或者使用 ajax 做少量的异步刷新。 那么带来的">
+<meta name="keywords" content="微服务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微服务流程以及带来的前端工程化思考">
+<meta property="og:url" content="http://bullyork.github.io/2017/06/24/micro-service/index.html">
+<meta property="og:site_name" content="缘来我们在这里">
+<meta property="og:description" content="引子此谓诚於中，形於外，故君子必慎其独也。 – 礼记·大学 前情概要传统的 web 开发并没有前后分离的概念，无论是 c#，还是 java，抑或是世界上最好的语言 PHP。大多是采用 cshtml，或者 jsp 作为模版，当作 view 层。这时候的前端扮演的角色很有限，通常工作流是前端根据设计还原出页面（html）。然后使用 js 制作动态效果或者使用 ajax 做少量的异步刷新。 那么带来的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-13T03:12:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微服务流程以及带来的前端工程化思考">
+<meta name="twitter:description" content="引子此谓诚於中，形於外，故君子必慎其独也。 – 礼记·大学 前情概要传统的 web 开发并没有前后分离的概念，无论是 c#，还是 java，抑或是世界上最好的语言 PHP。大多是采用 cshtml，或者 jsp 作为模版，当作 view 层。这时候的前端扮演的角色很有限，通常工作流是前端根据设计还原出页面（html）。然后使用 js 制作动态效果或者使用 ajax 做少量的异步刷新。 那么带来的">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://bullyork.github.io/2017/06/24/micro-service/">
+
+
+
+
+
+  <title>微服务流程以及带来的前端工程化思考 | 缘来我们在这里</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">缘来我们在这里</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">乱世天狼的博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bullyork.github.io/2017/06/24/micro-service/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乱世天狼">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="缘来我们在这里">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">微服务流程以及带来的前端工程化思考</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-24T09:00:36+08:00">
+                2017-06-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h3><p>此谓诚於中，形於外，故君子必慎其独也。</p>
+<p>– 礼记·大学</p>
+<h3 id="前情概要"><a href="#前情概要" class="headerlink" title="前情概要"></a>前情概要</h3><p>传统的 web 开发并没有前后分离的概念，无论是 c#，还是 java，抑或是世界上最好的语言 PHP。大多是采用 cshtml，或者 jsp 作为模版，当作 view 层。这时候的前端扮演的角色很有限，通常工作流是前端根据设计还原出页面（html）。然后使用 js 制作动态效果或者使用 ajax 做少量的异步刷新。 那么带来的问题是：</p>
+<ul>
+<li> 后端同学不仅要关注数据问题，同时还要关注渲染问题</li>
+<li>前端同学和后端同学很难完全同步开发</li>
+<li> 出现问题不容易迅速归责，而且前端问题，即使前端修改了，后端必须同时修改，浪费人力</li>
+<li> 每次跳转都要向后端发送整个页面的请求，即使两个页面差别不大</li>
+</ul>
+<p>鉴于出现上述问题，我们  出于工程化目的，需要前后分离。随着前端的逐渐发展，打包工具不断更新，react，vue 等  优秀框架逐渐完善。前端已经成熟到可以工程化了。 这时候前后分离已经不仅仅是一种设想了，同时是可以在实际中运用的工程化操作。</p>
+<p><strong>思路：前端  后端通过一个<em>协议规范</em>定义方法，参数类型，返回类型。协商制定完成协议后，前端根据协议自主使用 mock 数据开发前端视图和交互逻辑。后端根据协议自主实现协议规定的接口定义。最后前端+后端一起  联调 ，联调后交付测试</strong></p>
+<h3 id="沟通的规范选择"><a href="#沟通的规范选择" class="headerlink" title=" 沟通的规范选择"></a> 沟通的规范选择</h3><p>最开始我们选择的是<a href="http://thrift.apache.org/" target="_blank" rel="noopener">thrift</a>，<a href="https://git-wip-us.apache.org/repos/asf?p=thrift.git;a=blob_plain;f=tutorial/tutorial.thrift" target="_blank" rel="noopener">thrift 文件  示例</a>。</p>
+<p>thrift 非常强大，但是原生不支持 go 语言(我们后端使用 go 语言)。</p>
+<p>所以我们选用了<a href="https://developers.google.com/protocol-buffers/" target="_blank" rel="noopener">proto-buffers</a></p>
+<p>两者都属于 IDL 语言(接口定义语言)。两者各有优缺点，thrift 比较成熟，但是文档  不完善。proto-buffers 文档齐全，底层采用二进制，文件更小。</p>
+<p><a href="https://my.oschina.net/itblog/blog/289965" target="_blank" rel="noopener">两者具体的比较</a></p>
+<p>ok, 那么一个服务的定义长什么样呢？举个栗子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">syntax = &quot;proto3&quot;;</span><br><span class="line">package test;</span><br><span class="line"></span><br><span class="line">service Sample &#123;</span><br><span class="line">	rpc Ping(SamplePing) returns (SamplePingResp);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// ---------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">message SamplePing &#123;</span><br><span class="line">	string Msg = 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">message SamplePingResp &#123;</span><br><span class="line">	string Msg = 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ok，这个例子很重要，我们之后会回来再看这个例子。</p>
+<h2 id="后端服务生成套路"><a href="#后端服务生成套路" class="headerlink" title="后端服务生成套路"></a>后端服务生成套路</h2><p>我们采用的是 rpc 协议，至于 rpc 和 restful 之争，可以参考 <a href="https://www.zhihu.com/question/28570307/answer/47876255" target="_blank" rel="noopener">这里</a></p>
+<p>我们暂时假设上述示例要完成的是一个  名为 test 的服务，那么我们可以通过<strong> 域名／test.Sample/Ping</strong>来语义化的定义我们  的服务 uri。ok，到了这里，我们前端同学会忽略掉你所有的代码逻辑，只关注于你在<strong> 域名／test.Sample/Ping</strong>上面实现的服务是否和定义一致。</p>
+<p>ok，接下来是实现定义好的方法，那怎么做才能更好的把控服务性能并且减少开发时间呢？</p>
+<h3 id="减少开发时间，提升开发效率"><a href="#减少开发时间，提升开发效率" class="headerlink" title="减少开发时间，提升开发效率"></a>减少开发时间，提升开发效率</h3><h4 id="goflow"><a href="#goflow" class="headerlink" title="goflow"></a>goflow</h4><p>什么是 goflow，goflow 做了什么？</p>
+<p>goflow 准确的说是一整套开发工具，提供的是命令行街口，可以通过命令行方便的创建服务，启动服务，提交 mr 等；同时 goflow 还将常用的包进行  统一的版本管理。总之，goflow 提供的是更舒服的开发体验。</p>
+<h4 id="ezorm"><a href="#ezorm" class="headerlink" title="ezorm"></a>ezorm</h4><p> 我们通常有可能采用不同的数据哭，比如 mysql，mongo。那么每次都写访问数据  库的代码是重复并且没有必要的。所以 ezorm 可以自动生成数据库调用。<a href="https://github.com/ezbuy/ezorm" target="_blank" rel="noopener">ezorm 文档传送门</a></p>
+<p>所以有了 goflow 和 ezorm，程序员可以专注于业务实现！</p>
+<h3 id="控制服务性能，进行服务监控"><a href="#控制服务性能，进行服务监控" class="headerlink" title="控制服务性能，进行服务监控"></a>控制服务性能，进行服务监控</h3><h4 id="consul"><a href="#consul" class="headerlink" title="consul"></a>consul</h4><p> 什么是 consul？consul 有什么用？</p>
+<p><a href="https://www.consul.io/" target="_blank" rel="noopener">consul</a>是一个服务发现机制 ，主要用来做服务发现。</p>
+<p>为什么需要服务发现？</p>
+<p>当我们的服务变得多了起来的时候，去监控每个服务是否正常服务，并在异常时进行报警是非常重要的！</p>
+<h3 id="性能实时监控"><a href="#性能实时监控" class="headerlink" title="性能实时监控"></a>性能实时监控</h3><h4 id="grafana"><a href="#grafana" class="headerlink" title="grafana"></a>grafana</h4><p><a href="https://grafana.com/" target="_blank" rel="noopener">grafana</a>是一个开源的性能分析和监控工具，界面很酷。</p>
+<h4 id="kibana"><a href="#kibana" class="headerlink" title="kibana"></a>kibana</h4><p><a href="https://www.elastic.co/guide/en/kibana/current/introduction.html" target="_blank" rel="noopener">kibana</a>开源的，基于 Elasticsearch 的统计工具</p>
+<h3 id="错误日志"><a href="#错误日志" class="headerlink" title="错误日志"></a>错误日志</h3><h4 id="sentry"><a href="#sentry" class="headerlink" title="sentry"></a>sentry</h4><p><a href="https://github.com/getsentry/sentry" target="_blank" rel="noopener">sentry</a>是一个  实时日志平台，方便及时接受错误并报警。</p>
+<h2 id="前端套路"><a href="#前端套路" class="headerlink" title=" 前端套路"></a> 前端套路</h2><h3 id="api-调用"><a href="#api-调用" class="headerlink" title="api 调用"></a>api 调用</h3><p>由于 protobuf 并没有支持直接生成前端调用（有 nodejs 的），所以目前前端是自己解析 protobuf 并且生成调用</p>
+<h3 id="渲染技术"><a href="#渲染技术" class="headerlink" title="渲染技术"></a>渲染技术</h3><p> 通过对比 react 和 vue 我们最终选择的 react，因为考虑到生态  链还有维护人， 我们有理由相信 react 会更稳定一点。</p>
+<h3 id="接下来要做的事"><a href="#接下来要做的事" class="headerlink" title="接下来要做的事"></a>接下来要做的事</h3><p>通过参考后端的套路，我不禁在思索前端是否也可以进行  一套工具的开发？</p>
+<h3 id="jsflow"><a href="#jsflow" class="headerlink" title="jsflow"></a>jsflow</h3><p>要达成目的：对公司内部  依赖版本进行统一管理，新建项目时，自动生成 webpack 配置，基本项目结构。通过命令行自动生成组件基本结构。</p>
+<h3 id="jsorm"><a href="#jsorm" class="headerlink" title="jsorm"></a>jsorm</h3><p>根据定义生成基本的 api 调用，异步 action，异步 action 对应 reducer。</p>
+<h3 id="pageGen"><a href="#pageGen" class="headerlink" title="pageGen"></a>pageGen</h3><p>如果仅仅是后台应用（增删改查），可以通过 yaml 配置，直接生成页面！</p>
+<p>以上，jsflow，jsorm 适用于所有 react 项目，可以帮助人工更少的书写代码，新同学不需要  了解太多概念，就可以提供有效代码，只需要关注于组件的 ui 展示和  交互逻辑。</p>
+<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><p>可以扩展一个统一提供报错机制，将前端错误报送日志服务器。可以在框架层面加上错误处理和性能优化。</p>
+<p> 我正在做的是 jsorm， 目前还不成熟，还在努力的 coding。但我觉得有一整套开发工具链是很有必要的， 可以提高开发速度，并且提高开发质量！并且可以在架构层面做优化。</p>
+<p>以上，暂时的  思考，各位  大佬，请多多指教！</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/微服务/" rel="tag"># 微服务</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/22/西塘/" rel="next" title="西塘">
+                <i class="fa fa-chevron-left"></i> 西塘
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/26/css-key-point/" rel="prev" title="css重点">
+                css重点 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">乱世天狼</p>
+              <p class="site-description motion-element" itemprop="description">乱世天狼 | 前端 | html | css | html5 | css3 | react | redux | webpack | 哲学 | 精神 | 生活</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#引子"><span class="nav-number">1.</span> <span class="nav-text">引子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前情概要"><span class="nav-number">2.</span> <span class="nav-text">前情概要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#沟通的规范选择"><span class="nav-number">3.</span> <span class="nav-text"> 沟通的规范选择</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#后端服务生成套路"><span class="nav-number"></span> <span class="nav-text">后端服务生成套路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#减少开发时间，提升开发效率"><span class="nav-number">1.</span> <span class="nav-text">减少开发时间，提升开发效率</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#goflow"><span class="nav-number">1.1.</span> <span class="nav-text">goflow</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ezorm"><span class="nav-number">1.2.</span> <span class="nav-text">ezorm</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制服务性能，进行服务监控"><span class="nav-number">2.</span> <span class="nav-text">控制服务性能，进行服务监控</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#consul"><span class="nav-number">2.1.</span> <span class="nav-text">consul</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性能实时监控"><span class="nav-number">3.</span> <span class="nav-text">性能实时监控</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#grafana"><span class="nav-number">3.1.</span> <span class="nav-text">grafana</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#kibana"><span class="nav-number">3.2.</span> <span class="nav-text">kibana</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误日志"><span class="nav-number">4.</span> <span class="nav-text">错误日志</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#sentry"><span class="nav-number">4.1.</span> <span class="nav-text">sentry</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前端套路"><span class="nav-number"></span> <span class="nav-text"> 前端套路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#api-调用"><span class="nav-number">1.</span> <span class="nav-text">api 调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渲染技术"><span class="nav-number">2.</span> <span class="nav-text">渲染技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接下来要做的事"><span class="nav-number">3.</span> <span class="nav-text">接下来要做的事</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jsflow"><span class="nav-number">4.</span> <span class="nav-text">jsflow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jsorm"><span class="nav-number">5.</span> <span class="nav-text">jsorm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pageGen"><span class="nav-number">6.</span> <span class="nav-text">pageGen</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展"><span class="nav-number">7.</span> <span class="nav-text">扩展</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">乱世天狼</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="文章 思想,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="精读 js 模块化发展  git 快捷键  mac-win 虚拟机使用数字键盘  玩转 webpack.DllPlugin  mermaid markdown 格式画流程图  event-loop  jsfiddle 前端演示工具  setTimeout or setInterval  深入浏览器理解 CSS animations 和 transitions 的性能问题  浏览器前端优化  虚拟">
+<meta name="keywords" content="文章 思想">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pearlandjade">
+<meta property="og:url" content="http://bullyork.github.io/2018/05/09/pearlandjade/index.html">
+<meta property="og:site_name" content="缘来我们在这里">
+<meta property="og:description" content="精读 js 模块化发展  git 快捷键  mac-win 虚拟机使用数字键盘  玩转 webpack.DllPlugin  mermaid markdown 格式画流程图  event-loop  jsfiddle 前端演示工具  setTimeout or setInterval  深入浏览器理解 CSS animations 和 transitions 的性能问题  浏览器前端优化  虚拟">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-12-05T11:28:28.615Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="pearlandjade">
+<meta name="twitter:description" content="精读 js 模块化发展  git 快捷键  mac-win 虚拟机使用数字键盘  玩转 webpack.DllPlugin  mermaid markdown 格式画流程图  event-loop  jsfiddle 前端演示工具  setTimeout or setInterval  深入浏览器理解 CSS animations 和 transitions 的性能问题  浏览器前端优化  虚拟">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://bullyork.github.io/2018/05/09/pearlandjade/">
+
+
+
+
+
+  <title>pearlandjade | 缘来我们在这里</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">缘来我们在这里</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">乱世天狼的博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bullyork.github.io/2018/05/09/pearlandjade/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乱世天狼">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="缘来我们在这里">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">pearlandjade</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-09T22:03:19+08:00">
+                2018-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li><p><a href="https://zhuanlan.zhihu.com/p/26118022" target="_blank" rel="noopener">精读 js 模块化发展</a></p>
+</li>
+<li><p><a href="https://github.com/robrmbyrussell/oh-my-zsh/wiki/Plugin:git" target="_blank" rel="noopener">git 快捷键</a></p>
+</li>
+<li><p><a href="https://bbs.feng.com/read-htm-tid-5100759.html" target="_blank" rel="noopener">mac-win 虚拟机使用数字键盘</a></p>
+</li>
+<li><p><a href="https://github.com/superpig/blog/issues/6" target="_blank" rel="noopener">玩转 webpack.DllPlugin</a></p>
+</li>
+<li><p><a href="https://mermaidjs.github.io/" target="_blank" rel="noopener">mermaid markdown 格式画流程图</a></p>
+</li>
+<li><p><a href="https://www.youtube.com/watch?v=8aGhZQkoFbQ&amp;feature=youtu.be" target="_blank" rel="noopener">event-loop</a></p>
+</li>
+<li><p><a href="http://jsfiddle.net/" target="_blank" rel="noopener">jsfiddle 前端演示工具</a></p>
+</li>
+<li><p><a href="https://stackoverflow.com/questions/729921/settimeout-or-setinterval" target="_blank" rel="noopener">setTimeout or setInterval</a></p>
+</li>
+<li><p><a href="http://sy-tang.github.io/2014/05/14/CSS%20animations%20and%20transitions%20performance-%20looking%20inside%20the%20browser/" target="_blank" rel="noopener">深入浏览器理解 CSS animations 和 transitions 的性能问题</a></p>
+</li>
+<li><p><a href="http://jinlong.github.io/2017/05/08/optimising-the-front-end-for-the-browser/" target="_blank" rel="noopener">浏览器前端优化</a></p>
+</li>
+<li><p><a href="https://github.com/livoras/blog/issues/13" target="_blank" rel="noopener">虚拟 dom 实现</a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/38313717" target="_blank" rel="noopener">函数防抖与函数节流</a></p>
+</li>
+<li><p><a href="https://developers.google.com/web/fundamentals/performance/webpack/" target="_blank" rel="noopener">webpack 配置优化</a></p>
+</li>
+<li><a href="https://developers.google.com/web/fundamentals/performance/why-performance-matters/?hl=zh-cn" target="_blank" rel="noopener">web performance</a></li>
+<li><a href="http://www.alloyteam.com/2015/09/explore-performance/" target="_blank" rel="noopener">performance 统计</a></li>
+<li><a href="https://mta.qq.com/mta/data/device/os" target="_blank" rel="noopener">移动端 app 版本分布统计-腾讯</a></li>
+<li><a href="https://github.com/skyline75489/what-happens-when-zh_CN#id9" target="_blank" rel="noopener">what-happens-when</a></li>
+<li><a href="https://sspai.com/post/40574" target="_blank" rel="noopener">白噪音</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2011/05/how_to_choose_free_software_licenses.html" target="_blank" rel="noopener">如何选择开源许可证</a></li>
+<li><a href="https://404forest.com/2016/08/09/%E5%BE%AE%E4%BF%A1%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AE%9E%E7%8E%B0%E5%90%8E%E9%80%80%E8%AE%B0%E5%BF%86%E6%B5%8F%E8%A7%88%E4%BD%8D%E7%BD%AE/" target="_blank" rel="noopener">微信浏览器实现后退记忆浏览位置</a></li>
+<li><a href="https://cloud.tencent.com/developer/article/1004367" target="_blank" rel="noopener">MySQL 数据库设计总结</a></li>
+<li><a href="https://www.zhihu.com/question/34840297" target="_blank" rel="noopener">从0开始学MySQL</a></li>
+<li><a href="https://github.com/RubaXa/Sortable" target="_blank" rel="noopener">Sortable</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/42465502" target="_blank" rel="noopener">webpack 提速</a></li>
+<li><a href="https://github.com/cssmagic/blog/issues" target="_blank" rel="noopener">改善代码系列</a></li>
+<li><a href="https://www.jiguang.cn/reports" target="_blank" rel="noopener">极光大数据</a></li>
+<li><a href="https://www.draw.io" target="_blank" rel="noopener">绘图网站</a></li>
+<li><a href="https://v.qq.com/x/page/z0317tld7f3.html" target="_blank" rel="noopener">都江堰原理</a></li>
+<li><a href="https://ocw.mit.edu" target="_blank" rel="noopener">MIT 开放课程</a></li>
+<li><a href="https://wizardforcel.gitbooks.io/the-art-of-programming-by-july/content/index.html" target="_blank" rel="noopener">面试和算法</a></li>
+<li><a href="https://developers.google.com/web/updates/2018/09/inside-browser-part1" target="_blank" rel="noopener">现代浏览器原理</a></li>
+<li><a href="https://yeoman.io/" target="_blank" rel="noopener">THE WEB’S SCAFFOLDING TOOL FOR MODERN WEBAPPS</a></li>
+<li><a href="https://videos.pexels.com/" target="_blank" rel="noopener">ppt背景音乐以及视频</a></li>
+<li><a href="https://github.com/ljianshu/Blog" target="_blank" rel="noopener">前端优质博客</a></li>
+<li><a href="https://regex101.com/" target="_blank" rel="noopener">正则表达式验证网站1</a></li>
+<li><a href="https://jex.im/regulex/#!flags=&amp;re=%5E%5B%5E%5Cs%22&#39;%3C%3E%5C%2F%3D%5D%2B" target="_blank" rel="noopener">正则表达式验证网站2</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript" target="_blank" rel="noopener">学习js</a></li>
+<li><a href="http://jo2.org/html5-canvas-libary-introduction/" target="_blank" rel="noopener">canvas库</a></li>
+<li><a href="https://frontendmasters.com/books/front-end-handbook/2019/#2" target="_blank" rel="noopener">front-end handbook</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/文章-思想/" rel="tag"># 文章 思想</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/09/long-term-cache/" rel="next" title="long-term-cache">
+                <i class="fa fa-chevron-left"></i> long-term-cache
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/23/happypack应用/" rel="prev" title="happypack应用">
+                happypack应用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">乱世天狼</p>
+              <p class="site-description motion-element" itemprop="description">乱世天狼 | 前端 | html | css | html5 | css3 | react | redux | webpack | 哲学 | 精神 | 生活</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">乱世天狼</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

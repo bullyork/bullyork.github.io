@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="html5,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="引子村居 —— 高鼎草长莺飞二月天，拂堤杨柳醉春烟。儿童散学归来早，忙趁东风放纸鸢。 ——此引子与正文无关 html5新特性 canvas video,audio 离线存储 article、footer、header、nav、section calendar、date、time、email、url、search  各种特性解析canvashtml5让人激动人心的特性之一。大多数玩过三国杀的人都会遇">
+<meta name="keywords" content="html5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="html5-正文">
+<meta property="og:url" content="http://bullyork.github.io/2017/03/13/html5-02/index.html">
+<meta property="og:site_name" content="缘来我们在这里">
+<meta property="og:description" content="引子村居 —— 高鼎草长莺飞二月天，拂堤杨柳醉春烟。儿童散学归来早，忙趁东风放纸鸢。 ——此引子与正文无关 html5新特性 canvas video,audio 离线存储 article、footer、header、nav、section calendar、date、time、email、url、search  各种特性解析canvashtml5让人激动人心的特性之一。大多数玩过三国杀的人都会遇">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-13T03:12:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="html5-正文">
+<meta name="twitter:description" content="引子村居 —— 高鼎草长莺飞二月天，拂堤杨柳醉春烟。儿童散学归来早，忙趁东风放纸鸢。 ——此引子与正文无关 html5新特性 canvas video,audio 离线存储 article、footer、header、nav、section calendar、date、time、email、url、search  各种特性解析canvashtml5让人激动人心的特性之一。大多数玩过三国杀的人都会遇">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://bullyork.github.io/2017/03/13/html5-02/">
+
+
+
+
+
+  <title>html5-正文 | 缘来我们在这里</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">缘来我们在这里</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">乱世天狼的博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bullyork.github.io/2017/03/13/html5-02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="乱世天狼">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="缘来我们在这里">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">html5-正文</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-13T08:15:36+08:00">
+                2017-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h3><h4 id="村居-——-高鼎"><a href="#村居-——-高鼎" class="headerlink" title="村居 —— 高鼎"></a>村居 —— 高鼎</h4><p>草长莺飞二月天，拂堤杨柳醉春烟。儿童散学归来早，忙趁东风放纸鸢。</p>
+<p>——此引子与正文无关</p>
+<h3 id="html5新特性"><a href="#html5新特性" class="headerlink" title="html5新特性"></a>html5新特性</h3><ul>
+<li>canvas</li>
+<li>video,audio</li>
+<li>离线存储</li>
+<li>article、footer、header、nav、section</li>
+<li>calendar、date、time、email、url、search</li>
+</ul>
+<h3 id="各种特性解析"><a href="#各种特性解析" class="headerlink" title="各种特性解析"></a>各种特性解析</h3><h4 id="canvas"><a href="#canvas" class="headerlink" title="canvas"></a>canvas</h4><p>html5让人激动人心的特性之一。大多数玩过三国杀的人都会遇到过这样的问题，需要装一个叫做<strong>flash</strong>的插件。理论上html5可以只根据canvas元素做出任何目前flash能做出来的游戏。canvas允许js控制canvas里面的每个像素，所以在这里，js有了极大的自由度。当然以前html还是可以做一些简单的游戏的，但是脱离了canvas所有的动态效果均需要操作dom，开销很大。所以canvas接口相当于html5提供给了js一个极为开放的图形绘制接口。</p>
+<p>参考网站：<a href="http://www.createjs.cc/" target="_blank" rel="noopener">createjs</a></p>
+<p>注：等我们介绍完了html5，css3，js，我会专门写专题介绍如何一步步用createjs做出来很惊艳的效果！</p>
+<h4 id="video，audio"><a href="#video，audio" class="headerlink" title="video，audio"></a>video，audio</h4><p>此两个接口可以允许视频，音频的播放不再依赖于类似于<strong>flash</strong>的插件。</p>
+<p>新的浏览器看优酷视频是不是总需要下载flash插件？</p>
+<p>大家可以试一试<a href="https://v.qq.com/" target="_blank" rel="noopener">腾讯视频</a>，它实现了video标签播放，不需要额外加载flash插件。</p>
+<h4 id="离线存储"><a href="#离线存储" class="headerlink" title="离线存储"></a>离线存储</h4><ul>
+<li>localStorage</li>
+<li>sessionStorage</li>
+<li>Application Cache</li>
+</ul>
+<p>网上都可以查到的用法我是不会讲的，之后可以放上链接。这里说下三个接口的意义。localStorage，除非用户手动清除，否则不会消失，和网站绑定。sessionStorage，此窗口不跳转的（可刷新）会话期间保留，跳转或者关闭，存储失效。Application Cache，可用于离线应用，将不常变化的网页资源存储在本地。</p>
+<p>三个接口（还有一个IndexedDB正在推广）极大的提高了html5的可用性。想一想，当你没有网的时候，你依然可以浏览一个网站，做任何的操作，是不是很酷。不过有些操作不会立即生效，需要等网络接通后程序自动处理掉。但是这对用户来讲，体验性就有了极大的提高。</p>
+<h4 id="article、footer、header、nav、section"><a href="#article、footer、header、nav、section" class="headerlink" title="article、footer、header、nav、section"></a>article、footer、header、nav、section</h4><p>无须多言，这些标签是自解释的，正确的使用对于网站seo有好处。</p>
+<h4 id="calendar、date、time、email、url、search"><a href="#calendar、date、time、email、url、search" class="headerlink" title="calendar、date、time、email、url、search"></a>calendar、date、time、email、url、search</h4><p>本来由js+css实现的空间可以简单的用html标签了！但是鉴于部分ui并不是很漂亮，可选用！</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="http://www.runoob.com/html/html5-intro.html" target="_blank" rel="noopener">菜鸟教程</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/html5/" rel="tag"># html5</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/12/html5-01/" rel="next" title="html5序章">
+                <i class="fa fa-chevron-left"></i> html5序章
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/13/自省警言/" rel="prev" title="自省警言">
+                自省警言 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">乱世天狼</p>
+              <p class="site-description motion-element" itemprop="description">乱世天狼 | 前端 | html | css | html5 | css3 | react | redux | webpack | 哲学 | 精神 | 生活</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#引子"><span class="nav-number">1.</span> <span class="nav-text">引子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#村居-——-高鼎"><span class="nav-number">1.1.</span> <span class="nav-text">村居 —— 高鼎</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#html5新特性"><span class="nav-number">2.</span> <span class="nav-text">html5新特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#各种特性解析"><span class="nav-number">3.</span> <span class="nav-text">各种特性解析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#canvas"><span class="nav-number">3.1.</span> <span class="nav-text">canvas</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#video，audio"><span class="nav-number">3.2.</span> <span class="nav-text">video，audio</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#离线存储"><span class="nav-number">3.3.</span> <span class="nav-text">离线存储</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#article、footer、header、nav、section"><span class="nav-number">3.4.</span> <span class="nav-text">article、footer、header、nav、section</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#calendar、date、time、email、url、search"><span class="nav-number">3.5.</span> <span class="nav-text">calendar、date、time、email、url、search</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">3.6.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">乱世天狼</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
